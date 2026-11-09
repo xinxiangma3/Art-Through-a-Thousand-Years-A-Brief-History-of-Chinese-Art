@@ -1,0 +1,1556 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>探索中国美术史 / Çin Sanat Tarihi Keşfi</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap');
+  :root {
+    --paper: #f8f3e6;
+    --paper-deep: #eee5d3;
+    --ink: #221e1a;
+    --ink-soft: #4f483f;
+    --cinnabar: #b91c1c;
+    --cinnabar-dark: #8c1616;
+    --gold: #b45309;
+    --gold-light: #fef3c7;
+    --jade: #065f46;
+    --success: #15803d;
+    --error: #b91c1c;
+    --border: #292524;
+    --shadow: 0 4px 0 #292524;
+    --shadow-lg: 0 8px 0 #292524, 0 16px 28px rgba(41,37,36,0.12);
+    --radius: 14px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "SimSun", Georgia, serif;
+    background: var(--paper);
+    color: var(--ink);
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.65;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+  /* Cartoon Chinese Fantasy World Aura: Floating Clouds & Warm Mineral Pigment Mist */
+  body::before {
+    content: "";
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(circle 380px at 10% 15%, rgba(185,28,28,0.06) 0%, transparent 60%),
+      radial-gradient(circle 420px at 90% 85%, rgba(30,80,132,0.06) 0%, transparent 65%),
+      radial-gradient(circle 350px at 50% 50%, rgba(180,83,9,0.04) 0%, transparent 60%),
+      linear-gradient(180deg, rgba(254,250,242,0.85) 0%, rgba(240,230,210,0.65) 100%);
+  }
+  body::after {
+    content: "";
+    position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.045;
+    background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M60 20 C75 10 90 25 80 40 C95 45 95 65 80 70 C70 85 50 85 40 70 C25 65 25 45 40 40 C30 25 45 10 60 20 Z' fill='%23292524'/%3E%3C/svg%3E");
+    background-size: 80px 80px;
+  }
+  .screen { display: none; position: relative; z-index: 1; min-height: 100vh; padding: 0 0 48px; }
+  .screen.active { display: block; animation: fairyPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
+  @keyframes fairyPop {
+    from { opacity: 0; transform: scale(0.97) translateY(10px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+  @keyframes sealIn { from { opacity: 0; transform: scale(0.5) rotate(-12deg); } to { opacity: 1; transform: scale(1) rotate(0); } }
+  @keyframes cuteFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+
+  .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+  h1,h2,h3,h4 { font-weight: 700; letter-spacing: 0.04em; line-height: 1.35; }
+
+  /* Bouncy, Tactile Cartoon Buttons */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 10px 22px; border: 2.5px solid var(--border); background: #fffdf5;
+    color: var(--ink); font-size: 0.95rem; font-family: inherit; font-weight: 700;
+    cursor: pointer; transition: all 0.16s cubic-bezier(0.22,1,0.36,1); border-radius: var(--radius);
+    letter-spacing: 0.04em; position: relative; box-shadow: var(--shadow);
+  }
+  .btn:hover {
+    transform: translateY(-2px); box-shadow: 0 6px 0 var(--border);
+    background: #fef8eb;
+  }
+  .btn:active {
+    transform: translateY(3px); box-shadow: 0 1px 0 var(--border);
+  }
+  .btn-primary {
+    background: var(--cinnabar); color: #fffef8; border-color: #7f1d1d;
+    box-shadow: 0 4px 0 #7f1d1d;
+  }
+  .btn-primary:hover {
+    background: #991b1b; border-color: #601414; color: #fff;
+    box-shadow: 0 6px 0 #601414;
+  }
+  .btn-primary:active {
+    box-shadow: 0 1px 0 #601414; transform: translateY(3px);
+  }
+  .btn-gold {
+    background: linear-gradient(135deg, #d97706, #b45309); color: #fffef8;
+    border-color: #78350f; box-shadow: 0 4px 0 #78350f;
+  }
+  .btn-gold:hover { filter: brightness(1.08); box-shadow: 0 6px 0 #78350f; }
+  .btn:disabled { opacity: 0.45; cursor: not-allowed; pointer-events: none; box-shadow: none; transform: none; }
+  .btn-sm { padding: 6px 14px; font-size: 0.86rem; border-radius: 10px; }
+
+  /* Cartoon Scholar Treasure Topbar */
+  .topbar {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+    gap: 10px 16px; padding: 12px 20px;
+    background: rgba(254,250,240,0.95); border-bottom: 3px solid var(--border);
+    border-radius: 0 0 18px 18px;
+    box-shadow: 0 4px 0 rgba(41,37,36,0.06);
+    position: sticky; top: 0; z-index: 100;
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  }
+  .topbar .stats { display: flex; gap: 10px; font-size: 0.92rem; align-items: center; }
+  .stat {
+    display: flex; align-items: center; gap: 6px;
+    padding: 5px 12px; background: #fffdf7; border: 2px solid var(--border);
+    border-radius: 20px; font-size: 0.88rem; font-weight: 700;
+    box-shadow: 0 2px 0 var(--border);
+  }
+  .stat span { font-weight: 800; color: var(--cinnabar); min-width: 1.2em; font-family: monospace; }
+  .progress-wrap { flex: 1; min-width: 100px; max-width: 180px; }
+  .progress-bar {
+    height: 12px; background: var(--paper-deep); border: 2px solid var(--border);
+    border-radius: 12px; overflow: hidden; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+  }
+  .progress-fill {
+    height: 100%; width: 0%;
+    background: linear-gradient(90deg, #b91c1c, #d97706, #10b981);
+    transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    border-radius: 12px;
+  }
+
+  /* Compact & Delightful Language Selection Screen (Zero Blank Void!) */
+  #lang-screen {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    min-height: 600px; padding: 24px 16px; box-sizing: border-box;
+  }
+  .lang-portal-wrap {
+    width: 100%; max-width: 460px; margin: auto; animation: fairyPop 0.45s ease-out;
+  }
+  .lang-card {
+    background: #fffdf7;
+    border: 3px solid #292524;
+    border-radius: 20px;
+    box-shadow: 0 8px 0 #292524, 0 16px 36px rgba(41,37,36,0.14);
+    padding: 26px 22px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .lang-card-roof {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    margin-bottom: 12px;
+  }
+  .roof-badge {
+    background: #9f382d; color: #fffef8; font-size: 0.76rem; font-weight: 700;
+    padding: 3px 12px; border-radius: 20px; border: 1.5px solid #fff;
+    box-shadow: 0 2px 4px rgba(159,56,45,0.25); letter-spacing: 0.05em;
+  }
+  .roof-cloud { font-size: 0.95rem; }
+  .lang-card h1 {
+    font-size: clamp(1.6rem, 4vw, 2.1rem); margin-bottom: 4px; color: var(--cinnabar);
+    text-shadow: 1px 1px 0 rgba(185,28,28,0.2);
+    font-family: inherit; font-weight: 700;
+  }
+  .lang-card .subtitle { font-size: 1rem; color: #526786; margin-bottom: 8px; font-weight: 600; }
+  .lang-card .lang-deco {
+    width: 44px; height: 3.5px; background: linear-gradient(90deg, var(--cinnabar), var(--gold));
+    margin: 0 auto 14px; border-radius: 3px;
+  }
+  .lang-prompt {
+    font-size: 0.88rem; color: #665f54; margin-bottom: 16px; font-weight: 600;
+  }
+  .lang-btns {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 18px;
+  }
+  .lang-btn {
+    height: 74px; width: 100%; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    border: 2.5px solid #292524; background: #fffdf5; cursor: pointer;
+    border-radius: 14px; box-shadow: 0 4px 0 #292524;
+    transition: all 0.16s cubic-bezier(0.22,1,0.36,1);
+    font-size: 1.15rem; font-weight: 700; position: relative;
+  }
+  .lang-btn .lang-flag { font-size: 1.25rem; margin-bottom: 2px; }
+  .lang-btn .lang-name { line-height: 1.1; font-weight: 700; }
+  .lang-btn small { font-size: 0.75rem; font-weight: 500; opacity: 0.75; font-family: monospace; }
+  .lang-btn:hover {
+    transform: translateY(-2px); box-shadow: 0 6px 0 #292524;
+    background: #fef3c7; border-color: #b45309;
+  }
+  .lang-btn:active {
+    transform: translateY(3px); box-shadow: 0 1px 0 #292524;
+  }
+  .lang-feature-strip {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    font-size: 0.75rem; color: #847a6b; font-weight: 600;
+    padding-top: 12px; border-top: 1px dashed rgba(41,37,36,0.15);
+  }
+
+  /* Level Grid & Pavilion Cards */
+  .level-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 22px; margin-top: 10px;
+  }
+  .level-card {
+    border: 2.5px solid var(--border); background: #fffdf8; padding: 0; overflow: hidden;
+    cursor: pointer; transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1); position: relative;
+    border-radius: 16px;
+    box-shadow: 0 5px 0 var(--border), 0 10px 20px rgba(0,0,0,0.06);
+  }
+  .level-card::before {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, var(--cinnabar), var(--gold)); opacity: 0; transition: opacity 0.25s;
+  }
+  .level-card:hover:not(.locked) {
+    transform: translateY(-5px) scale(1.01);
+    box-shadow: 0 9px 0 var(--border), 0 18px 30px rgba(0,0,0,0.12);
+    border-color: var(--cinnabar);
+  }
+  .level-card:hover:not(.locked)::before { opacity: 1; }
+  .level-card.locked {
+    opacity: 0.55; cursor: not-allowed; filter: grayscale(0.65);
+    box-shadow: 0 3px 0 var(--border);
+  }
+  .level-card .cover {
+    height: 145px; display: flex; align-items: center; justify-content: center;
+    border-bottom: 2.5px solid var(--border); position: relative; overflow: hidden;
+    background: #fbf5e6;
+  }
+  .level-card .cover .emoji {
+    font-size: 3.8rem; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.12));
+    display: inline-block;
+    animation: cuteFloat 3.5s ease-in-out infinite;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .level-card:hover:not(.locked) .cover .emoji { transform: scale(1.18) rotate(4deg); }
+  .level-card .info { padding: 14px 16px 16px; }
+  .level-card h3 { font-size: 1.15rem; margin-bottom: 5px; color: var(--ink); }
+  .level-card p { font-size: 0.84rem; color: var(--ink-soft); line-height: 1.55; }
+  .level-card .badge {
+    position: absolute; top: 12px; right: 12px;
+    background: var(--cinnabar); color: #fffef8;
+    font-size: 0.72rem; padding: 4px 10px; font-weight: 800;
+    border-radius: 10px; border: 1.5px solid #fff;
+    letter-spacing: 0.05em; box-shadow: 0 2px 0 rgba(0,0,0,0.25);
+  }
+  .level-card.completed .badge { background: var(--jade); }
+  .level-card .lock-icon {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+    font-size: 2.4rem; opacity: 0.7; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+  }
+
+  /* Level Play View */
+  .level-header { margin: 16px 0 8px; padding-bottom: 12px; border-bottom: 2px dashed rgba(28,25,23,0.15); }
+  .level-header h2 { font-size: clamp(1.4rem, 3vw, 1.8rem); color: var(--cinnabar); margin-bottom: 4px; }
+  .level-header p { color: var(--ink-soft); font-size: 0.95rem; }
+  .level-nav {
+    display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 14px;
+    padding: 8px; background: var(--paper-deep); border: 2px solid var(--border);
+    border-radius: 14px; box-shadow: 0 3px 0 var(--border);
+  }
+  .tab-btn {
+    padding: 9px 16px; border: 2px solid transparent; background: transparent;
+    cursor: pointer; font-family: inherit; font-size: 0.88rem; font-weight: 700;
+    color: var(--ink-soft); transition: all 0.18s; letter-spacing: 0.03em;
+    border-radius: 10px;
+  }
+  .tab-btn:hover { color: var(--ink); background: #fffdf5; border-color: rgba(41,37,36,0.15); }
+  .tab-btn.active {
+    background: #9f382d; color: #fff; border-color: #792c25;
+    box-shadow: 0 3px 0 #792c25;
+  }
+  #level-progress-hint {
+    margin: 0 0 16px !important; padding: 10px 14px !important;
+    background: #fffdf7 !important; border: 2px solid var(--border) !important;
+    border-left: 5px solid var(--gold) !important; font-size: 0.88rem !important;
+    border-radius: 10px !important; box-shadow: 0 2px 0 var(--border) !important;
+    color: var(--ink-soft) !important; line-height: 1.6;
+  }
+  .panel { display: none; animation: slideUp 0.3s cubic-bezier(0.22,1,0.36,1); }
+  .panel.active { display: block; }
+
+  /* Artwork Cards */
+  .explore-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 18px; }
+  .art-card {
+    border: 2.5px solid var(--border); background: #fffdf8; overflow: hidden;
+    cursor: pointer; transition: all 0.22s cubic-bezier(0.22,1,0.36,1);
+    border-radius: 14px; box-shadow: 0 4px 0 var(--border);
+  }
+  .art-card:hover { transform: translateY(-4px); box-shadow: 0 8px 0 var(--border); border-color: var(--gold); }
+  .art-card .img-wrap {
+    height: 160px; background: var(--paper-deep);
+    display: flex; align-items: center; justify-content: center; overflow: hidden;
+  }
+  .art-card .img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+  .art-card:hover .img-wrap img { transform: scale(1.06); }
+  .art-card .img-wrap .placeholder { font-size: 3.2rem; }
+  .art-card .body { padding: 12px 14px; }
+  .art-card h4 { font-size: 1.02rem; margin-bottom: 4px; }
+  .art-card p { font-size: 0.8rem; color: var(--ink-soft); }
+
+  /* Modals */
+  .modal-overlay {
+    position: fixed; inset: 0; background: rgba(28,25,23,0.65); z-index: 200;
+    display: none; align-items: center; justify-content: center; padding: 20px;
+    backdrop-filter: blur(5px);
+  }
+  .modal-overlay.show { display: flex; }
+  .modal {
+    background: #fffdf7; border: 3px solid var(--border); max-width: 580px; width: 100%;
+    max-height: 88vh; overflow-y: auto; padding: 26px 26px 22px; position: relative;
+    border-radius: 20px; box-shadow: 0 12px 0 var(--border), 0 24px 48px rgba(0,0,0,0.25);
+    animation: fairyPop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .modal::before {
+    content: ""; position: absolute; top: 8px; left: 8px; right: 8px; bottom: 8px;
+    border: 1px dashed rgba(180,83,9,0.25); pointer-events: none; border-radius: 12px;
+  }
+  .modal h3 { color: var(--cinnabar); margin-bottom: 12px; font-size: 1.3rem; position: relative; }
+  .modal .close-btn {
+    position: absolute; top: 14px; right: 16px; background: var(--paper-deep); border: 2px solid var(--border);
+    border-radius: 50%; width: 34px; height: 34px; font-size: 1.2rem; cursor: pointer; color: var(--ink);
+    display: flex; align-items: center; justify-content: center; transition: 0.18s; z-index: 2;
+    box-shadow: 0 2px 0 var(--border);
+  }
+  .modal .close-btn:hover { background: #b91c1c; color: #fff; border-color: #7f1d1d; }
+  .modal img { max-width: 100%; margin: 12px 0; border: 2px solid var(--border); border-radius: 8px; }
+  .modal p { position: relative; color: var(--ink-soft); line-height: 1.75; }
+
+  /* Cartoon Scroll Quiz Options */
+  .quiz-q { font-size: 1.15rem; margin-bottom: 16px; font-weight: 700; line-height: 1.5; color: var(--ink); }
+  .options { display: flex; flex-direction: column; gap: 12px; }
+  .opt {
+    padding: 13px 18px; border: 2.5px solid var(--border); background: #fffdf7; cursor: pointer;
+    text-align: left; font-family: inherit; font-size: 0.98rem; font-weight: 600;
+    border-radius: 12px; box-shadow: 0 3px 0 var(--border);
+    transition: all 0.16s cubic-bezier(0.22,1,0.36,1); position: relative;
+  }
+  .opt:hover:not(.disabled) {
+    background: #fef3c7; border-color: #b45309; box-shadow: 0 4px 0 #b45309;
+    transform: translateX(4px);
+  }
+  .opt.correct {
+    background: #dcfce7; border-color: #15803d; color: #14532d;
+    box-shadow: 0 3px 0 #15803d; animation: sealIn 0.35s ease;
+  }
+  .opt.wrong {
+    background: #fee2e2; border-color: #b91c1c; color: #7f1d1d;
+    box-shadow: 0 3px 0 #b91c1c;
+  }
+  .opt.disabled { pointer-events: none; }
+  .feedback {
+    margin-top: 16px; padding: 14px 16px; border: 2px solid var(--border);
+    border-left: 6px solid var(--cinnabar); background: #fffdf7; display: none;
+    border-radius: 12px; box-shadow: 0 3px 0 var(--border); line-height: 1.65;
+  }
+  .feedback.show { display: block; animation: fairyPop 0.3s; }
+  .feedback.ok { border-left-color: var(--success); background: #f0fdf4; }
+  .feedback.no { border-left-color: var(--error); background: #fef2f2; }
+
+  /* Match Tiles */
+  .match-area { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  @media (max-width: 640px) { .match-area { grid-template-columns: 1fr; gap: 12px; } }
+  .match-col { display: flex; flex-direction: column; gap: 10px; }
+  .match-item {
+    padding: 13px 12px; border: 2.5px solid var(--border); background: #fffdf7; cursor: pointer;
+    text-align: center; transition: all 0.18s; min-height: 56px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center; font-size: 0.95rem; font-weight: 700;
+    box-shadow: 0 3px 0 var(--border);
+  }
+  .match-item:hover:not(.matched) { border-color: #b45309; background: #fef3c7; transform: translateY(-2px); }
+  .match-item.selected {
+    background: #fef3c7; border-color: #b45309; box-shadow: 0 3px 0 #b45309;
+    transform: scale(1.02);
+  }
+  .match-item.matched {
+    background: #dcfce7; border-color: #15803d; pointer-events: none; opacity: 0.92;
+    box-shadow: 0 2px 0 #15803d; animation: sealIn 0.3s ease;
+  }
+
+  /* Question Images */
+  .q-img-wrap {
+    max-width: 420px; margin: 0 auto 18px; border: 2.5px solid var(--border);
+    background: #fffdf7; padding: 8px; border-radius: 14px; box-shadow: 0 4px 0 var(--border);
+    position: relative;
+  }
+  .q-img {
+    display: block; width: 100%; max-height: 280px; object-fit: contain;
+    background: var(--paper-deep); margin: 0 auto; border-radius: 8px;
+  }
+  .q-img-fallback {
+    height: 180px; display: flex; align-items: center; justify-content: center;
+    font-size: 4rem; background: var(--paper-deep); border-radius: 8px;
+  }
+
+  /* Results */
+  .result-box {
+    text-align: center; padding: 36px 24px; border: 3px solid var(--border);
+    background: #fffdf7; max-width: 480px; margin: 32px auto; border-radius: 20px;
+    box-shadow: 0 8px 0 var(--border); position: relative;
+  }
+  .result-box .big-score {
+    font-size: 3.4rem; color: var(--cinnabar); font-weight: 800;
+    letter-spacing: 0.05em; margin: 8px 0; font-family: monospace;
+  }
+  .stars { font-size: 2.2rem; letter-spacing: 8px; margin: 12px 0; }
+
+  /* Unlock Tip */
+  #unlock-tip {
+    margin: 0 0 16px; padding: 12px 16px !important;
+    background: #fffdf7 !important; border: 2.5px solid var(--border) !important;
+    border-left: 6px solid var(--cinnabar) !important; font-size: 0.88rem !important;
+    border-radius: 12px !important; box-shadow: 0 3px 0 var(--border) !important;
+    color: var(--ink-soft) !important; line-height: 1.65;
+  }
+
+  .footer-note {
+    text-align: center; font-size: 0.78rem; color: var(--ink-soft);
+    margin-top: 40px; padding: 18px 16px; border-top: 2px dashed rgba(28,25,23,0.15);
+    line-height: 1.7;
+  }
+
+  /* Complete Button */
+  #complete-level-btn {
+    animation: pulseGlow 2s ease-in-out infinite;
+    font-size: 1.05rem; padding: 12px 30px;
+  }
+  @keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 4px 0 var(--cinnabar-dark), 0 0 0 0 rgba(185,28,28,0.35); }
+    50% { box-shadow: 0 4px 0 var(--cinnabar-dark), 0 0 0 8px rgba(185,28,28,0); }
+  }
+
+  .hidden { display: none !important; }
+  .mt-16 { margin-top: 16px; }
+  .mt-24 { margin-top: 24px; }
+  .text-center { text-align: center; }
+  .flex-center { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .topbar { padding: 10px 12px; gap: 8px; }
+    .stat { padding: 3px 8px; font-size: 0.8rem; }
+    .level-grid { grid-template-columns: 1fr; gap: 14px; }
+    .level-card .cover { height: 120px; }
+    .container { padding: 0 14px; }
+    .tab-btn { padding: 7px 10px; font-size: 0.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== LANGUAGE SELECT ========== -->
+<div id="lang-screen" class="screen active">
+  <div class="lang-portal-wrap">
+    <div class="lang-card">
+      <div class="lang-card-roof">
+        <span class="roof-cloud">☁️</span>
+        <span class="roof-badge">🏮 画境初开 · 趣味国风美育 🏮</span>
+        <span class="roof-cloud">☁️</span>
+      </div>
+      <h1>探索中国美术史</h1>
+      <p class="subtitle">Çin Sanat Tarihi Keşfi</p>
+      <div class="lang-deco"></div>
+      <p class="lang-prompt">请选择游玩语言 / Dil Seçin</p>
+      <div class="lang-btns">
+        <button class="lang-btn lang-btn-zh" onclick="setLang('zh')">
+          <span class="lang-flag">🇨🇳</span>
+          <span class="lang-name">中文</span>
+          <small>Chinese</small>
+        </button>
+        <button class="lang-btn lang-btn-tr" onclick="setLang('tr')">
+          <span class="lang-flag">🇹🇷</span>
+          <span class="lang-name">Türkçe</span>
+          <small>Turkish</small>
+        </button>
+      </div>
+      <div class="lang-feature-strip">
+        <span>⭐ 9大历史时期</span>
+        <span>·</span>
+        <span>🎨 5维美育闯关</span>
+        <span>·</span>
+        <span>🪙 趣味金币勋章</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== HOME / LEVEL SELECT ========== -->
+<div id="home-screen" class="screen">
+  <div class="topbar">
+    <div style="font-weight:700;font-size:1.05rem;letter-spacing:0.06em" id="home-title">探索中国美术史</div>
+    <div class="stats">
+      <div class="stat">⭐ <span id="home-stars">0</span></div>
+      <div class="stat">🪙 <span id="home-coins">0</span></div>
+      <div class="stat">📊 <span id="home-score">0</span></div>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" id="home-progress"></div></div>
+    </div>
+    <button class="btn btn-sm" id="sound-btn" onclick="toggleSound()" title="Sound">🔊</button>
+    <button class="btn btn-sm" onclick="showLang()">🌐</button>
+  </div>
+  <div class="container" style="padding-top:20px">
+    <p id="home-desc" style="margin:0 0 14px;color:var(--ink-soft)"></p>
+    <p id="unlock-tip"></p>
+    <div class="level-grid" id="level-grid"></div>
+    <div class="text-center mt-24">
+      <button class="btn btn-primary" id="final-btn" onclick="startFinal()" disabled></button>
+      <button class="btn btn-sm mt-16" onclick="resetGame()" id="reset-btn"></button>
+    </div>
+    <div class="footer-note" id="footer-note"></div>
+  </div>
+</div>
+
+<!-- ========== LEVEL PLAY ========== -->
+<div id="level-screen" class="screen">
+  <div class="topbar">
+    <button class="btn btn-sm" onclick="goHome()">← <span data-i18n="back">返回</span></button>
+    <div class="stats">
+      <div class="stat">⭐ <span id="lv-stars">0</span></div>
+      <div class="stat">🪙 <span id="lv-coins">0</span></div>
+      <div class="stat">📊 <span id="lv-score">0</span></div>
+    </div>
+    <button class="btn btn-sm" onclick="toggleSound()" title="Sound">🔊</button>
+  </div>
+  <div class="container" style="padding-top:8px">
+    <div class="level-header">
+      <h2 id="lv-title"></h2>
+      <p id="lv-desc"></p>
+    </div>
+    <div class="level-nav" id="level-tabs"></div>
+    <div id="level-panels"></div>
+    <div class="text-center mt-24" style="padding:8px 0 24px">
+      <button class="btn btn-primary" id="complete-level-btn" onclick="completeLevel()" style="display:none"></button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== FINAL CHALLENGE ========== -->
+<div id="final-screen" class="screen">
+  <div class="topbar">
+    <button class="btn btn-sm" onclick="goHome()">← <span data-i18n="back">返回</span></button>
+    <div class="stats">
+      <div class="stat">⭐ <span id="fn-stars">0</span></div>
+      <div class="stat">🪙 <span id="fn-coins">0</span></div>
+    </div>
+  </div>
+  <div class="container">
+    <h2 id="final-title" style="color:var(--cinnabar);margin:16px 0"></h2>
+    <div id="final-quiz-area"></div>
+  </div>
+</div>
+
+<!-- ========== RESULTS ========== -->
+<div id="result-screen" class="screen">
+  <div class="container">
+    <div class="result-box">
+      <h2 id="result-title"></h2>
+      <div class="big-score" id="result-score">0</div>
+      <div class="stars" id="result-stars"></div>
+      <p id="result-accuracy"></p>
+      <p id="result-msg" style="margin:16px 0;color:var(--soft-ink)"></p>
+      <div class="flex-center mt-24">
+        <button class="btn btn-primary" onclick="goHome()" id="result-home"></button>
+        <button class="btn" onclick="resetGame()" id="result-reset"></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for artwork detail -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <button class="close-btn" onclick="closeModal()">×</button>
+    <h3 id="modal-title"></h3>
+    <div id="modal-img"></div>
+    <p id="modal-body"></p>
+  </div>
+</div>
+
+<script>
+/* ===================== DATA & i18n ===================== */
+const LANG = {
+  zh: {
+    title: "探索中国美术史",
+    homeDesc: "扮演美术史探索者，完成九大历史时期关卡，解锁中国美术发展历程。点击关卡开始探索！",
+    back: "返回",
+    explore: "作品欣赏",
+    identify: "作品识别",
+    match: "配对游戏",
+    quiz: "知识问答",
+    style: "风格辨认",
+    complete: "完成本关",
+    finalChallenge: "综合挑战",
+    finalTitle: "中国美术史综合挑战",
+    finalDesc: "检验你对整个中国美术史的理解！",
+    next: "下一题",
+    submit: "提交",
+    correct: "正确！",
+    wrong: "不正确。",
+    explanation: "解析：",
+    score: "得分",
+    stars: "星星",
+    coins: "金币",
+    accuracy: "正确率",
+    resultTitle: "学习成果",
+    resultHome: "返回主页",
+    resultReset: "重新开始",
+    locked: "请先完成前面的关卡",
+    completed: "已完成",
+    resetConfirm: "确定要清空所有进度并重新开始吗？",
+    footer: "使用说明：选择语言后进入主页，依次解锁并完成九个历史关卡。每关包含作品欣赏、识别、配对、问答与风格辨认。答对获得金币与星星，完成关卡解锁下一关。全部完成后可进行综合挑战。本游戏可离线使用（图片需联网加载）。",
+    matchHint: "点击左侧与右侧对应项进行配对",
+    matchDone: "配对完成！",
+    styleHint: "观察作品风格，选择所属时期",
+    identifyHint: "这件作品属于哪个时期？",
+    levels: [
+      { name: "史前美术", short: "史前", desc: "彩陶、岩画、玉器、陶塑，仰韶文化与马家窑文化。" },
+      { name: "先秦美术", short: "先秦", desc: "青铜器、商周礼器、玉器与漆器。" },
+      { name: "秦汉美术", short: "秦汉", desc: "秦始皇陵兵马俑、汉代画像石、画像砖与帛画。" },
+      { name: "魏晋南北朝", short: "魏晋", desc: "佛教艺术、敦煌艺术、石窟艺术与顾恺之。" },
+      { name: "隋唐美术", short: "隋唐", desc: "敦煌壁画、唐代人物画、山水画与雕塑。" },
+      { name: "五代两宋", short: "宋", desc: "山水画、院体画、文人画，范宽、郭熙、张择端等。" },
+      { name: "元代美术", short: "元", desc: "文人画发展，赵孟頫、黄公望、倪瓒等。" },
+      { name: "明清美术", short: "明清", desc: "山水、花鸟、人物、版画与各绘画流派。" },
+      { name: "近现代美术", short: "近现代", desc: "传统转型，徐悲鸿、齐白石、林风眠等。" }
+    ]
+  },
+  tr: {
+    title: "Çin Sanat Tarihi Keşfi",
+    homeDesc: "Sanat tarihi kâşifi rolünü üstlenin, dokuz tarihî dönemi tamamlayarak Çin sanatının gelişimini keşfedin. Seviyeye tıklayarak başlayın!",
+    back: "Geri",
+    explore: "Eser İnceleme",
+    identify: "Eser Tanıma",
+    match: "Eşleştirme",
+    quiz: "Bilgi Yarışması",
+    style: "Üslup Tanıma",
+    complete: "Seviyeyi Bitir",
+    finalChallenge: "Genel Meydan Okuma",
+    finalTitle: "Çin Sanat Tarihi Genel Sınavı",
+    finalDesc: "Tüm Çin sanat tarihi bilginizi test edin!",
+    next: "Sonraki",
+    submit: "Gönder",
+    correct: "Doğru!",
+    wrong: "Yanlış.",
+    explanation: "Açıklama: ",
+    score: "Puan",
+    stars: "Yıldız",
+    coins: "Jeton",
+    accuracy: "Doğruluk",
+    resultTitle: "Öğrenme Sonuçları",
+    resultHome: "Ana Sayfa",
+    resultReset: "Yeniden Başla",
+    locked: "Önce önceki seviyeleri tamamlayın",
+    completed: "Tamamlandı",
+    resetConfirm: "Tüm ilerlemeyi silip yeniden başlamak istediğinize emin misiniz?",
+    footer: "Kullanım: Dil seçtikten sonra ana sayfaya girin, dokuz tarihî seviyeyi sırayla açın ve tamamlayın. Her seviyede eser inceleme, tanıma, eşleştirme, soru-cevap ve üslup tanıma vardır. Doğru cevaplarla jeton ve yıldız kazanın. Tüm seviyeler bitince genel sınav açılır. Çevrimdışı kullanılabilir (görseller için internet gerekir).",
+    matchHint: "Sol ve sağdaki karşılık gelen öğeleri tıklayarak eşleştirin",
+    matchDone: "Eşleştirme tamamlandı!",
+    styleHint: "Eserin üslubunu inceleyip dönemini seçin",
+    identifyHint: "Bu eser hangi döneme aittir?",
+    levels: [
+      { name: "Tarih Öncesi Sanat", short: "Tarih Öncesi", desc: "Boyalı seramik, kaya resimleri, yeşim, çömlek; Yangshao ve Majiayao kültürleri." },
+      { name: "Qin Öncesi Sanat", short: "Qin Öncesi", desc: "Bronz kaplar, Shang-Zhou ritüel eşyaları, yeşim ve lake." },
+      { name: "Qin-Han Sanatı", short: "Qin-Han", desc: "Terracotta Ordusu, Han dönemı taş kabartmalar, tuğla ve ipek resimler." },
+      { name: "Wei-Jin ve Güney-Kuzey", short: "Wei-Jin", desc: "Budist sanat, Dunhuang, mağara sanatı ve Gu Kaizhi." },
+      { name: "Sui-Tang Sanatı", short: "Sui-Tang", desc: "Dunhuang freskleri, Tang figür resmi, manzara ve heykel." },
+      { name: "Beş Hanedan ve Song", short: "Song", desc: "Manzara, akademi resmi, edebiyatçı resmi; Fan Kuan, Guo Xi, Zhang Zeduan." },
+      { name: "Yuan Dönemi", short: "Yuan", desc: "Edebiyatçı resminin gelişimi; Zhao Mengfu, Huang Gongwang, Ni Zan." },
+      { name: "Ming-Qing Sanatı", short: "Ming-Qing", desc: "Manzara, çiçek-kuş, figür, baskı ve resim okulları." },
+      { name: "Modern Dönem", short: "Modern", desc: "Geleneksel dönüşüm; Xu Beihong, Qi Baishi, Lin Fengmian." }
+    ]
+  }
+};
+
+/* Level content: artworks, quizzes, matches, style questions */
+const LEVELS = [
+  /* 0 史前 */
+  {
+    emoji: "🏺", color: "#8B4513",
+    arts: [
+      { title: {zh:"仰韶彩陶（人面鱼纹等）",tr:"Yangshao boyalı seramik"}, desc: {zh:"仰韶文化（约前5000–前3000年）彩陶是中国新石器时代美术的重要代表，常见几何纹、鱼纹、人面纹，反映黄河流域早期农业社会的审美与信仰。教科书中常以此类器物开篇。",tr:"Yangshao (yak. MÖ 5000–3000) boyalı seramikleri, Neolitik Çin sanatının temel örnekleridir."}, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Yangshao_Culture_Pottery_21.jpg/640px-Yangshao_Culture_Pottery_21.jpg" },
+      { title: {zh:"马家窑彩陶",tr:"Majiayao boyalı seramik"}, desc: {zh:"马家窑文化（约前3300–前2000年）分布于甘肃、青海一带，以黑彩螺旋纹、波浪纹著称，工艺精美，是史前彩陶发展的高峰之一。",tr:"Majiayao (yak. MÖ 3300–2000) spiral ve dalga motifli siyah boyalı seramikleriyle ünlüdür."}, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Majiayao_culture_pottery.jpg/480px-Majiayao_culture_pottery.jpg" },
+      { title: {zh:"新石器时代陶器造型",tr:"Neolitik çömlek formu"}, desc: {zh:"尖底瓶等器物体现史前制陶对实用与形式的统一，亦常见于中国美术史教材的史前章节。",tr:"Sivri tabanlı şişe gibi formlar, tarih öncesi seramik tekniğini gösterir."}, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/CMOC_Treasures_of_Ancient_China_exhibit_-_water_jar.jpg/480px-CMOC_Treasures_of_Ancient_China_exhibit_-_water_jar.jpg" }
+    ],
+    identify: {
+      q: {zh:"下图这类彩绘陶器主要属于哪个文化？",tr:"Bu boyalı seramik hangi kültüre aittir?"},
+      img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Yangshao_Culture_Pottery_21.jpg/640px-Yangshao_Culture_Pottery_21.jpg",
+      opts: [{zh:"仰韶文化",tr:"Yangshao"}, {zh:"龙山文化",tr:"Longshan"}, {zh:"夏文化",tr:"Xia"}, {zh:"商文化",tr:"Shang"}],
+      ans: 0, exp: {zh:"仰韶文化以红地黑彩或褐彩的几何纹、动物纹彩陶为标志。",tr:"Yangshao boyalı seramikleriyle tanınır."}
+    },
+    match: {
+      left: [{zh:"仰韶文化",tr:"Yangshao"}, {zh:"马家窑文化",tr:"Majiayao"}, {zh:"玉琮/玉璧",tr:"Yeşim cong/bi"}],
+      right: [{zh:"彩绘几何与鱼纹陶器",tr:"Geometrik ve balık motifli seramik"}, {zh:"螺旋波浪黑彩陶器",tr:"Spiral-dalga siyah boyalı"}, {zh:"礼仪用玉器",tr:"Törensel yeşim"}],
+      pairs: [0,1,2]
+    },
+    quiz: [
+      { q: {zh:"图中彩陶大约属于哪个年代？",tr:"Görseldeki seramik yaklaşık hangi döneme aittir?"}, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Yangshao_Culture_Pottery_21.jpg/640px-Yangshao_Culture_Pottery_21.jpg", opts: [{zh:"前5000–前3000年（仰韶）",tr:"MÖ 5000–3000"}, {zh:"前2000–前1000年",tr:"MÖ 2000–1000"}, {zh:"前300–前200年",tr:"MÖ 300–200"}, {zh:"公元1–200年",tr:"MS 1–200"}], ans: 0, exp: {zh:"仰韶文化约前5000至前3000年。",tr:"Yangshao yak. MÖ 5000–3000."} },
+      { q: {zh:"下图螺旋波浪黑彩陶器主要属于？",tr:"Spiral-dalga siyah boyalı seramik hangi kültüre aittir?"}, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Majiayao_culture_pottery.jpg/480px-Majiayao_culture_pottery.jpg", opts: [{zh:"马家窑文化",tr:"Majiayao"}, {zh:"商代",tr:"Shang"}, {zh:"唐代",tr:"Tang"}, {zh:"清代",tr:"Qing"}], ans: 0, exp: {zh:"马家窑彩陶以繁复黑彩纹饰著称。",tr:"Majiayao siyah motifleriyle ünlüdür."} },
+      { q: {zh:"下图尖底类陶器反映了史前制陶的什么特点？",tr:"Sivri tabanlı kap neyi yansıtır?"}, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/CMOC_Treasures_of_Ancient_China_exhibit_-_water_jar.jpg/480px-CMOC_Treasures_of_Ancient_China_exhibit_-_water_jar.jpg", opts: [{zh:"实用与造型的统一",tr:"İşlev ve form birliği"}, {zh:"油画技法",tr:"Yağlıboya"}, {zh:"青铜铸造",tr:"Bronz döküm"}, {zh:"摄影术",tr:"Fotoğraf"}], ans: 0, exp: {zh:"史前陶器兼顾储水、汲水等功能与形式美。",tr:"Neolitik kaplar işlev ve güzelliği birleştirir."} }
+    ],
+    style: {
+      q: {zh:"以螺旋纹、波浪纹黑彩装饰的精美彩陶，主要属于？",tr:"Spiral-dalga siyah boyalı seramikler hangi kültüre aittir?"},
+      img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Majiayao_culture_pottery.jpg/480px-Majiayao_culture_pottery.jpg",
+      opts: [{zh:"马家窑文化",tr:"Majiayao"}, {zh:"仰韶早期",tr:"Erken Yangshao"}, {zh:"商周",tr:"Shang-Zhou"}, {zh:"汉代",tr:"Han"}],
+      ans: 0, exp: {zh:"马家窑彩陶以繁复螺旋、波浪黑彩著称。",tr:"Majiayao spiral ve dalga motifleriyle tipiktir."}
+    }
+  },
+  /* 1 先秦 */
+  {
+    emoji: "🥉", color: "#B8860B",
+    arts: [
+      { title: {zh:"商周青铜鼎（礼器）",tr:"Shang-Zhou bronz ding"}, desc: {zh:"商周青铜礼器是先秦美术的核心。鼎等器物用于祭祀与宴飨，饕餮等纹饰体现礼制与王权。《中国美术简史》等教材均以青铜器为先秦重点。",tr:"Shang-Zhou bronz ritüel kapları, Qin öncesi sanatın merkezidir."}, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Shang_dynasty_bronze_ding.jpg/480px-Shang_dynasty_bronze_ding.jpg" },
+      { title: {zh:"青铜礼器造型与纹饰",tr:"Bronz kap formu ve motif"}, desc: {zh:"厚重造型与神秘动物面纹（饕餮）是商周青铜器的典型特征，区别于后世器物。",tr:"Ağır form ve taotie motifleri Shang-Zhou bronzlarının tipik özelliğidir."}, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Shang_dynasty_bronze_ding.jpg/480px-Shang_dynasty_bronze_ding.jpg" },
+      { title: {zh:"礼器与权力象征",tr:"Ritüel kap ve iktidar"}, desc: {zh:"青铜器不仅是实用器，更是政治与宗教权威的物质载体，列鼎制度反映等级秩序。",tr:"Bronz kaplar aynı zamanda siyasi ve dini otoritenin taşıyıcısıdır."}, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Shang_dynasty_bronze_ding.jpg/480px-Shang_dynasty_bronze_ding.jpg" }
+    ],
+    identify: {
+      q: {zh:"下图用于祭祀、带饕餮纹的青铜容器属于哪个时期？",tr:"Taotie motifli bu bronz kap hangi döneme aittir?"},
+      img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Shang_dynasty_bronze_ding.jpg/480px-Shang_dynasty_bronze_ding.jpg",
+      opts: [{zh:"商周",tr:"Shang-Zhou"}, {zh:"秦汉",tr:"Qin-Han"}, {zh:"隋唐",tr:"Sui-Tang"}, {zh:"明清",tr:"Ming-Qing"}],
+      ans: 0, exp: {zh:"饕餮纹是商周青铜礼器的典型装饰。",tr:"Taotie, Shang-Zhou bronzlarının tipik süslemesidir."}
+    },
+    match: {
+      left: [{zh:"鼎",tr:"Ding"}, {zh:"饕餮纹",tr:"Taotie"}, {zh:"漆器",tr:"Lake"}],
+      right: [{zh:"青铜礼器",tr:"Bronz ritüel kap"}, {zh:"商周常见装饰",tr:"Shang-Zhou süsleme"}, {zh:"战国生活与丧葬用具",tr:"Savaşan Devletler eşyası"}],
+      pairs: [0,1,2]
+    },
+    quiz: [
+      { q: {zh:"下图青铜器最核心的社会功能是？",tr:"Bu bronz kabın temel toplumsal işlevi nedir?"}, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Shang_dynasty_bronze_ding.jpg/480px-Shang_dynasty_bronze_ding.jpg", opts: [{zh:"祭祀与礼制象征",tr:"Ayin ve tören sembolü"}, {zh:"日常玩具",tr:"Oyuncak"}, {zh:"现代广告",tr:"Reklam"}, {zh:"摄影道具",tr:"Fotoğraf prop"}], ans: 0, exp: {zh:"青铜礼器是权力与祭祀的核心载体。",tr:"Bronz ritüel kaplar iktidar ve ayinin taşıyıcısıdır."} },
+      { q: {zh:"“饕餮纹”常见于哪个时期？",tr:"Taotie motifi hangi dönemde yaygındır?"}, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Shang_dynasty_bronze_ding.jpg/480px-Shang_dynasty_bronze_ding.jpg", opts: [{zh:"商周",tr:"Shang-Zhou"}, {zh:"唐代",tr:"Tang"}, {zh:"宋代",tr:"Song"}, {zh:"清代",tr:"Qing"}], ans: 0, exp: {zh:"饕餮纹是商周青铜器代表性纹样。",tr:"Taotie Shang-Zhou bronzlarının karakteristik motifidir."} },
+      { q: {zh:"战国漆器以哪个地区最为著名？",tr:"Savaşan Devletler lake sanatı hangi bölgeyle anılır?"}, opts: [{zh:"楚地",tr:"Chu"}, {zh:"齐地",tr:"Qi"}, {zh:"秦地",tr:"Qin"}, {zh:"燕地",tr:"Yan"}], ans: 0, exp: {zh:"楚国漆器工艺精湛，色彩造型极具特色。",tr:"Chu lake sanatı inceliğiyle öne çıkar."} }
+    ],
+    style: {
+      q: {zh:"厚重、有饕餮面纹、用于祭祀的青铜器，典型属于？",tr:"Ağır, taotie motifli ayin bronzları hangi döneme tipiktir?"},
+      img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Shang_dynasty_bronze_ding.jpg/480px-Shang_dynasty_bronze_ding.jpg",
+      opts: [{zh:"商周",tr:"Shang-Zhou"}, {zh:"汉代",tr:"Han"}, {zh:"唐代",tr:"Tang"}, {zh:"明代",tr:"Ming"}],
+      ans: 0, exp: {zh:"商周青铜礼器以厚重造型与神秘动物纹为特征。",tr:"Shang-Zhou bronzları ağır form ve hayvan motifleriyle ayırt edilir."}
+    }
+  },
+  /* 2 秦汉 */
+  {
+    emoji: "🗿", color: "#696969",
+    arts: [
+      { title: {zh:"秦始皇陵兵马俑",tr:"Terracotta Ordusu"}, desc: {zh:"约前210年制成的兵马俑是秦代雕塑的巅峰，真人大小、按军阵排列，写实风格与帝国威仪在教材中均作为秦汉重点介绍。",tr:"Terracotta Ordusu (yak. MÖ 210), Qin heykel sanatının zirvesidir."}, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Terracotta_Army%2C_Xi%27an%2C_China.jpg/640px-Terracotta_Army%2C_Xi%27an%2C_China.jpg" },
+      { title: {zh:"马王堆汉墓T形帛画",tr:"Mawangdui T biçimli ipek resim"}, desc: {zh:"西汉马王堆一号墓帛画表现升天、神话与现实，是汉代绘画重要遗存，几乎所有中国美术史教材都会收录。",tr:"Mawangdui ipek resim, Han dönemi resminin önemli kalıntısıdır."}, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Western_Han_Chinese_Silk.JPG/480px-Western_Han_Chinese_Silk.JPG" },
+      { title: {zh:"马王堆彩绘木俑",tr:"Mawangdui boyalı ahşap figürler"}, desc: {zh:"汉墓随葬木俑反映当时服饰与丧葬观念，是了解汉代造型艺术的重要实物。",tr:"Han mezar ahşap figürleri dönemin giyim ve cenaze anlayışını yansıtır."}, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Mawangdui_Painted_Figurines_%2810112640664%29.jpg/480px-Mawangdui_Painted_Figurines_%2810112640664%29.jpg" }
+    ],
+    identify: {
+      q: {zh:"下图真人大小军阵陶俑属于哪个时期？",tr:"Bu gerçek boyutlu asker figürleri hangi döneme aittir?"},
+      img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Terracotta_Army%2C_Xi%27an%2C_China.jpg/640px-Terracotta_Army%2C_Xi%27an%2C_China.jpg",
+      opts: [{zh:"秦代",tr:"Qin"}, {zh:"商代",tr:"Shang"}, {zh:"唐代",tr:"Tang"}, {zh:"宋代",tr:"Song"}],
+      ans: 0, exp: {zh:"秦始皇陵兵马俑是秦代雕塑的集大成。",tr:"Terracotta Ordusu Qin heykelinin zirvesidir."}
+    },
+    match: {
+      left: [{zh:"兵马俑",tr:"Terracotta Ordu"}, {zh:"画像石",tr:"Taş kabartma"}, {zh:"帛画",tr:"İpek resim"}],
+      right: [{zh:"秦代陵墓陪葬",tr:"Qin mezar eşliği"}, {zh:"汉代墓室装饰",tr:"Han mezar süslemesi"}, {zh:"马王堆等汉墓出土",tr:"Mawangdui Han mezarları"}],
+      pairs: [0,1,2]
+    },
+    quiz: [
+      { q: {zh:"下图兵马俑大约制作于？",tr:"Terracotta Ordusu yaklaşık ne zaman yapılmıştır?"}, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Terracotta_Army%2C_Xi%27an%2C_China.jpg/640px-Terracotta_Army%2C_Xi%27an%2C_China.jpg", opts: [{zh:"公元前210年前后",tr:"Yaklaşık MÖ 210"}, {zh:"公元1世纪",tr:"MS 1. yy"}, {zh:"唐代",tr:"Tang"}, {zh:"宋代",tr:"Song"}], ans: 0, exp: {zh:"随秦始皇约前210年入葬。",tr:"Qin Shi Huang ile yak. MÖ 210."} },
+      { q: {zh:"下图T形帛画出土于何处？主题之一是？",tr:"Bu T biçimli ipek resim nereden çıkmıştır?"}, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Western_Han_Chinese_Silk.JPG/480px-Western_Han_Chinese_Silk.JPG", opts: [{zh:"马王堆汉墓 · 升仙与神话",tr:"Mawangdui · göğe yükseliş"}, {zh:"敦煌 · 仅山水",tr:"Dunhuang · yalnızca manzara"}, {zh:"故宫 · 近现代",tr:"Saray · modern"}, {zh:"龙门 · 石窟造像",tr:"Longmen · heykel"}], ans: 0, exp: {zh:"马王堆帛画表现墓主升天及神话世界。",tr:"Mawangdui ipek resim göğe yükselişi betimler."} },
+      { q: {zh:"下图汉代木俑主要反映什么？",tr:"Bu Han ahşap figürler neyi yansıtır?"}, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Mawangdui_Painted_Figurines_%2810112640664%29.jpg/480px-Mawangdui_Painted_Figurines_%2810112640664%29.jpg", opts: [{zh:"服饰与丧葬观念",tr:"Giyim ve cenaze anlayışı"}, {zh:"油画透视",tr:"Yağlıboya perspektif"}, {zh:"印象派光影",tr:"Empresyonizm"}, {zh:"抽象表现主义",tr:"Soyut ekspresyonizm"}], ans: 0, exp: {zh:"汉俑是了解当时生活与丧葬的重要实物。",tr:"Han figürler dönem yaşamını gösterir."} }
+    ],
+    style: {
+      q: {zh:"写实、阵列式的大型陶俑群，是哪个时期的典型？",tr:"Gerçekçi, düzenli büyük pişmiş toprak figürler hangi döneme tipiktir?"},
+      img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Terracotta_Army%2C_Xi%27an%2C_China.jpg/640px-Terracotta_Army%2C_Xi%27an%2C_China.jpg",
+      opts: [{zh:"秦代",tr:"Qin"}, {zh:"魏晋",tr:"Wei-Jin"}, {zh:"元代",tr:"Yuan"}, {zh:"清代",tr:"Qing"}],
+      ans: 0, exp: {zh:"秦兵马俑以写实与大规模阵列著称。",tr:"Qin Terracotta Ordusu gerçekçilik ve düzeniyle ünlüdür."}
+    }
+  },
+  /* 3 魏晋 */
+  {
+    emoji: "🛕", color: "#4A7C59",
+    arts: [
+      { title: {zh:"敦煌莫高窟（早期石窟艺术）",tr:"Mogao Mağaraları"}, desc: {zh:"十六国至南北朝，敦煌石窟开凿，佛教壁画与塑像传入并本土化，是教材中魏晋南北朝美术的核心内容之一。",tr:"Dunhuang mağaraları, Wei-Jin-Güney-Kuzey Budist sanatının merkezidir."}, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Mogao_Caves.jpg/640px-Mogao_Caves.jpg" },
+      { title: {zh:"顾恺之风格（传神写照）",tr:"Gu Kaizhi üslubu"}, desc: {zh:"东晋顾恺之强调“传神写照”，《女史箴图》《洛神赋图》等奠定早期人物画传统，几乎所有中国绘画史都会专节介绍。",tr:"Gu Kaizhi “ruhu yansıtma”yı savundu; erken figür resminin temelidir."}, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Gu_Kaizhi.jpg/480px-Gu_Kaizhi.jpg" },
+      { title: {zh:"石窟与佛教美术",tr:"Mağara ve Budist sanat"}, desc: {zh:"云冈、龙门与敦煌共同构成魏晋南北朝佛教美术高峰，融合印度、中亚与中原风格。",tr:"Yungang, Longmen ve Dunhuang Budist sanatın zirvesini oluşturur."}, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Mogao_Caves.jpg/640px-Mogao_Caves.jpg" }
+    ],
+    identify: {
+      q: {zh:"下图石窟艺术兴盛于何时？与“传神写照”相关的画家是？",tr:"Bu mağara sanatı ne zaman yükseldi? “Ruhu yansıtma” kime aittir?"},
+      img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Mogao_Caves.jpg/640px-Mogao_Caves.jpg",
+      opts: [{zh:"魏晋南北朝 · 顾恺之",tr:"Wei-Jin · Gu Kaizhi"}, {zh:"唐代 · 吴道子",tr:"Tang · Wu Daozi"}, {zh:"宋代 · 范宽",tr:"Song · Fan Kuan"}, {zh:"元代 · 赵孟頫",tr:"Yuan · Zhao Mengfu"}],
+      ans: 0, exp: {zh:"敦煌始凿于十六国至南北朝；顾恺之提出传神写照。",tr:"Dunhuang On Altı Krallık–Güney-Kuzey’de başladı; Gu Kaizhi “ruhu yansıtma”yı savundu."}
+    },
+    match: {
+      left: [{zh:"顾恺之",tr:"Gu Kaizhi"}, {zh:"敦煌莫高窟",tr:"Mogao"}, {zh:"云冈/龙门",tr:"Yungang/Longmen"}],
+      right: [{zh:"传神写照、早期人物画",tr:"Ruh yansıtma, erken figür"}, {zh:"丝绸之路佛教艺术",tr:"İpek Yolu Budist sanat"}, {zh:"大型石窟造像",tr:"Büyük mağara heykeli"}],
+      pairs: [0,1,2]
+    },
+    quiz: [
+      { q: {zh:"魏晋南北朝美术最突出的新因素是？",tr:"Wei-Jin sanatındaki en belirgin yeni unsur nedir?"}, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Mogao_Caves.jpg/640px-Mogao_Caves.jpg", opts: [{zh:"佛教艺术的传入与发展",tr:"Budist sanatın girişi"}, {zh:"油画技法",tr:"Yağlıboya"}, {zh:"摄影",tr:"Fotoğraf"}, {zh:"抽象表现主义",tr:"Soyut ekspresyonizm"}], ans: 0, exp: {zh:"佛教沿丝绸之路传入，石窟壁画成为时代标志。",tr:"Budizm İpek Yolu ile girdi; mağara freskleri dönemin simgesi oldu."} },
+      { q: {zh:"强调“传神写照”的东晋画家是？",tr:"“Ruhu yansıtma”yı vurgulayan ressam kimdir?"}, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Gu_Kaizhi.jpg/480px-Gu_Kaizhi.jpg", opts: [{zh:"顾恺之",tr:"Gu Kaizhi"}, {zh:"吴道子",tr:"Wu Daozi"}, {zh:"范宽",tr:"Fan Kuan"}, {zh:"齐白石",tr:"Qi Baishi"}], ans: 0, exp: {zh:"顾恺之提出传神写照，影响深远。",tr:"Gu Kaizhi’nin sözü kalıcı etki bırakmıştır."} },
+      { q: {zh:"敦煌石窟艺术开始于？",tr:"Dunhuang mağara sanatı ne zaman başladı?"}, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Mogao_Caves.jpg/640px-Mogao_Caves.jpg", opts: [{zh:"十六国至南北朝",tr:"On Altı Krallık–Güney-Kuzey"}, {zh:"宋代",tr:"Song"}, {zh:"清代",tr:"Qing"}, {zh:"民国",tr:"Cumhuriyet"}], ans: 0, exp: {zh:"莫高窟开凿始于十六国时期。",tr:"Mogao On Altı Krallık döneminde başladı."} }
+    ],
+    style: {
+      q: {zh:"佛教题材、石窟壁画与塑像、融合外来风格，主要属于？",tr:"Budist mağara fresk ve heykelleri hangi döneme aittir?"},
+      img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Mogao_Caves.jpg/640px-Mogao_Caves.jpg",
+      opts: [{zh:"魏晋南北朝",tr:"Wei-Jin-Güney-Kuzey"}, {zh:"史前",tr:"Tarih öncesi"}, {zh:"商周",tr:"Shang-Zhou"}, {zh:"近现代",tr:"Modern"}],
+      ans: 0, exp: {zh:"魏晋南北朝是佛教美术本土化的关键时期。",tr:"Wei-Jin, Budist sanatın yerelleştiği kritik dönemdir."}
+    }
+  },
+  /* 4 隋唐 */
+  {
+    emoji: "🎨", color: "#C23A2B",
+    arts: [
+      { title: {zh:"敦煌唐代壁画",tr:"Tang dönemi Dunhuang freskleri"}, desc: {zh:"唐代敦煌壁画达到鼎盛，色彩华丽、人物丰满、经变画宏大，是盛唐气象在美术上的集中体现。",tr:"Tang Dunhuang freskleri ihtişam ve dolgun figürlerle zirvededir."}, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Mogao_Caves.jpg/640px-Mogao_Caves.jpg" },
+      { title: {zh:"唐代人物与“画圣”传统",tr:"Tang figür ve “resim azizi”"}, desc: {zh:"吴道子等推动人物画发展，“吴带当风”成为经典风格，教材多以画圣与盛唐人物画并论。",tr:"Wu Daozi figür resmini geliştirmiş, “Wu kuşağı” klasik üslup olmuştur."}, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Gu_Kaizhi.jpg/480px-Gu_Kaizhi.jpg" },
+      { title: {zh:"盛唐佛教艺术气象",tr:"Altın Tang Budist sanat"}, desc: {zh:"雕塑如龙门卢舍那大佛，壁画如敦煌盛唐诸窟，共同展现开放、恢宏的时代气质。",tr:"Longmen ve Dunhuang, açık ve görkemli Tang atmosferini yansıtır."}, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Mogao_Caves.jpg/640px-Mogao_Caves.jpg" }
+    ],
+    identify: {
+      q: {zh:"下图华丽丰满的佛教壁画主要属于哪个朝代？",tr:"Bu görkemli Budist freskler hangi hanedana aittir?"},
+      img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Mogao_Caves.jpg/640px-Mogao_Caves.jpg",
+      opts: [{zh:"唐代",tr:"Tang"}, {zh:"商代",tr:"Shang"}, {zh:"秦代",tr:"Qin"}, {zh:"近现代",tr:"Modern"}],
+      ans: 0, exp: {zh:"盛唐敦煌壁画以华丽与丰满为特征。",tr:"Altın Tang freskleri ihtişam ve dolgunlukla tipiktir."}
+    },
+    match: {
+      left: [{zh:"吴道子",tr:"Wu Daozi"}, {zh:"敦煌盛唐壁画",tr:"Dunhuang Altın Tang"}, {zh:"龙门大佛",tr:"Longmen Buda"}],
+      right: [{zh:"吴带当风、画圣",tr:"Wu kuşağı, resim azizi"}, {zh:"华丽丰满的佛教壁画",tr:"Görkemli Budist fresk"}, {zh:"唐代大型石窟造像",tr:"Tang büyük heykel"}],
+      pairs: [0,1,2]
+    },
+    quiz: [
+      { q: {zh:"唐代敦煌壁画的主要特点是？",tr:"Tang Dunhuang fresklerinin özelliği nedir?"}, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Mogao_Caves.jpg/640px-Mogao_Caves.jpg", opts: [{zh:"色彩华丽、人物丰满",tr:"Zengin renk, dolgun figür"}, {zh:"全黑白极简",tr:"Siyah-beyaz minimal"}, {zh:"只画山水",tr:"Yalnızca manzara"}, {zh:"抽象几何",tr:"Soyut geometri"}], ans: 0, exp: {zh:"盛唐壁画富丽堂皇、人物体态丰腴。",tr:"Altın Tang freskleri ihtişamlı ve dolgundur."} },
+      { q: {zh:"唐代被誉为“画圣”的画家是？",tr:"Tang’da “resim azizi” kimdir?"}, opts: [{zh:"吴道子",tr:"Wu Daozi"}, {zh:"张择端",tr:"Zhang Zeduan"}, {zh:"黄公望",tr:"Huang Gongwang"}, {zh:"齐白石",tr:"Qi Baishi"}], ans: 0, exp: {zh:"吴道子在人物与宗教画上成就极高。",tr:"Wu Daozi figür ve dini resimde zirvededir."} },
+      { q: {zh:"唐代美术整体气质是？",tr:"Tang sanatının genel atmosferi nedir?"}, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Mogao_Caves.jpg/640px-Mogao_Caves.jpg", opts: [{zh:"开放、恢宏、自信",tr:"Açık, görkemli, özgüvenli"}, {zh:"封闭压抑",tr:"Kapalı, baskıcı"}, {zh:"完全西化",tr:"Tam Batılı"}, {zh:"只有文人画",tr:"Yalnız edebiyatçı resmi"}], ans: 0, exp: {zh:"盛唐国力强盛、中外交流频繁，风格开放大气。",tr:"Altın Tang açık ve görkemli üslup kazandırmıştır."} }
+    ],
+    style: {
+      q: {zh:"色彩华丽、人物丰腴、佛教经变宏大的壁画，主要属于？",tr:"Zengin renkli, dolgun figürlü Budist freskler hangi döneme aittir?"},
+      img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Mogao_Caves.jpg/640px-Mogao_Caves.jpg",
+      opts: [{zh:"唐代",tr:"Tang"}, {zh:"史前",tr:"Tarih öncesi"}, {zh:"商周",tr:"Shang-Zhou"}, {zh:"元代",tr:"Yuan"}],
+      ans: 0, exp: {zh:"盛唐敦煌壁画以华丽与丰满为典型。",tr:"Altın Tang Dunhuang freskleri ihtişamla tipikleşir."}
+    }
+  },
+  /* 5 宋 */
+  {
+    emoji: "🏞️", color: "#2E5A1C",
+    arts: [
+      { title: {zh:"范宽《溪山行旅图》",tr:"Fan Kuan – Dağ ve Dere Yolculuğu"}, desc: {zh:"北宋范宽代表作，雄伟山体与雨点皴体现北方山水的崇高感，是中国山水画史最重要的作品之一，教材必选。",tr:"Fan Kuan’ın başyapıtı, kuzey manzarasının yüceliğini yansıtır."}, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Travelers_Among_Mountains_and_Streams.png/480px-Travelers_Among_Mountains_and_Streams.png" },
+      { title: {zh:"张择端《清明上河图》（局部）",tr:"Zhang Zeduan – Qingming Shanghe Tu"}, desc: {zh:"描绘北宋汴京市井与河景的长卷，人物、建筑、船只细节丰富，是风俗画杰作，故宫藏本为传世名作。",tr:"Bianjing sokak ve nehir yaşamını betimleyen ünlü uzun rulodur."}, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Along_the_River_During_the_Qingming_Festival_%28detail_of_original%29.jpg/640px-Along_the_River_During_the_Qingming_Festival_%28detail_of_original%29.jpg" },
+      { title: {zh:"宋代山水与院体、文人画",tr:"Song manzara, akademi ve edebiyatçı resmi"}, desc: {zh:"宋代山水全面成熟，院体精工与文人写意并重，范宽、郭熙、张择端等构成教材两宋章节的主干。",tr:"Song’da manzara olgunlaşmış; akademi ve edebiyatçı resmi birlikte gelişmiştir."}, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Travelers_Among_Mountains_and_Streams.png/480px-Travelers_Among_Mountains_and_Streams.png" }
+    ],
+    identify: {
+      q: {zh:"下图长卷描绘北宋汴京市井，作者是？",tr:"Bu uzun rulo Bianjing’i betimler; ressamı kimdir?"},
+      img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Along_the_River_During_the_Qingming_Festival_%28detail_of_original%29.jpg/640px-Along_the_River_During_the_Qingming_Festival_%28detail_of_original%29.jpg",
+      opts: [{zh:"张择端",tr:"Zhang Zeduan"}, {zh:"顾恺之",tr:"Gu Kaizhi"}, {zh:"吴道子",tr:"Wu Daozi"}, {zh:"赵孟頫",tr:"Zhao Mengfu"}],
+      ans: 0, exp: {zh:"《清明上河图》是张择端传世名作。",tr:"Qingming Shanghe Tu, Zhang Zeduan’ındır."}
+    },
+    match: {
+      left: [{zh:"范宽",tr:"Fan Kuan"}, {zh:"张择端",tr:"Zhang Zeduan"}, {zh:"郭熙",tr:"Guo Xi"}],
+      right: [{zh:"溪山行旅、北方山水",tr:"Dağ-dere yolculuğu"}, {zh:"清明上河图",tr:"Qingming Shanghe Tu"}, {zh:"早春图、山水理论",tr:"Erken Bahar, teori"}],
+      pairs: [0,1,2]
+    },
+    quiz: [
+      { q: {zh:"下图《溪山行旅图》的作者是？",tr:"Bu manzaranın ressamı kimdir?"}, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Travelers_Among_Mountains_and_Streams.png/480px-Travelers_Among_Mountains_and_Streams.png", opts: [{zh:"范宽",tr:"Fan Kuan"}, {zh:"张择端",tr:"Zhang Zeduan"}, {zh:"齐白石",tr:"Qi Baishi"}, {zh:"徐悲鸿",tr:"Xu Beihong"}], ans: 0, exp: {zh:"《溪山行旅图》是范宽北方山水经典。",tr:"Fan Kuan’ın kuzey manzara klasiğidir."} },
+      { q: {zh:"下图描绘的是哪个城市的清明景象？",tr:"Bu sahne hangi şehrin Qingming görünümüdür?"}, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Along_the_River_During_the_Qingming_Festival_%28detail_of_original%29.jpg/640px-Along_the_River_During_the_Qingming_Festival_%28detail_of_original%29.jpg", opts: [{zh:"汴京（今开封）",tr:"Bianjing (Kaifeng)"}, {zh:"长安",tr:"Chang’an"}, {zh:"杭州",tr:"Hangzhou"}, {zh:"北京",tr:"Pekin"}], ans: 0, exp: {zh:"画中是北宋都城汴京。",tr:"Kuzey Song başkenti Bianjing’dir."} },
+      { q: {zh:"宋代“文人画”强调的是？",tr:"Song edebiyatçı resmi neyi vurgular?"}, opts: [{zh:"意趣、书法与自我表达",tr:"Anlam, hat ve kendini ifade"}, {zh:"完全写实模仿",tr:"Tam gerçekçi taklit"}, {zh:"只画皇帝肖像",tr:"Yalnız imparator portresi"}, {zh:"商业广告",tr:"Reklam"}], ans: 0, exp: {zh:"文人画重写意与文化修养。",tr:"Edebiyatçı resmi anlama ve yetkinliğe odaklanır."} }
+    ],
+    style: {
+      q: {zh:"精密市井长卷、北方雄伟山水并重，主要属于？",tr:"İnce sokak rulosu ve görkemli kuzey manzarası hangi döneme aittir?"},
+      img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Along_the_River_During_the_Qingming_Festival_%28detail_of_original%29.jpg/640px-Along_the_River_During_the_Qingming_Festival_%28detail_of_original%29.jpg",
+      opts: [{zh:"五代两宋",tr:"Beş Hanedan ve Song"}, {zh:"秦代",tr:"Qin"}, {zh:"商周",tr:"Shang-Zhou"}, {zh:"近现代",tr:"Modern"}],
+      ans: 0, exp: {zh:"宋代是山水、风俗与文人画全面成熟的时代。",tr:"Song manzara ve tür resminin olgun dönemidir."}
+    }
+  },
+  /* 6 元 */
+  {
+    emoji: "🖌️", color: "#4A3728",
+    arts: [
+      { title: {zh:"赵孟頫（书画同源）",tr:"Zhao Mengfu"}, desc: {zh:"元代赵孟頫提倡古意、书画同源，是连接宋元与开启明清文人画的关键人物，教材元代章节必述。",tr:"Zhao Mengfu “eski anlam” ve hat-resim birliğini savundu."}, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/9a_Zhao_Mengfu._Bathing_Horses._28.1_x_155.5_cm_Detail_of_the_scroll._Palace_museum%2C_Beijing1.jpg/640px-9a_Zhao_Mengfu._Bathing_Horses._28.1_x_155.5_cm_Detail_of_the_scroll._Palace_museum%2C_Beijing1.jpg" },
+      { title: {zh:"黄公望与元四家",tr:"Huang Gongwang ve Yuan Dört Ustası"}, desc: {zh:"黄公望《富春山居图》等以干笔淡墨写江南山水，代表元代文人山水的高峰。",tr:"Huang Gongwang, Yuan edebiyatçı manzarasının zirvesidir."}, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/%E9%BB%83%E5%85%AC%E6%9C%9B%E5%83%8F.jpg/640px-%E9%BB%83%E5%85%AC%E6%9C%9B%E5%83%8F.jpg" },
+      { title: {zh:"元代文人画精神",tr:"Yuan edebiyatçı resmi"}, desc: {zh:"简淡构图、逸笔草草与隐逸情怀，是元代文人画区别于院体的鲜明特征。",tr:"Yalın kompozisyon ve münzevi duygu Yuan edebiyatçı resminin özelliğidir."}, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/9a_Zhao_Mengfu._Bathing_Horses._28.1_x_155.5_cm_Detail_of_the_scroll._Palace_museum%2C_Beijing1.jpg/640px-9a_Zhao_Mengfu._Bathing_Horses._28.1_x_155.5_cm_Detail_of_the_scroll._Palace_museum%2C_Beijing1.jpg" }
+    ],
+    identify: {
+      q: {zh:"元代提倡“古意”、书画同源的重要书画家是？",tr:"Yuan’da “eski anlam”ı savunan sanatçı kimdir?"},
+      img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/9a_Zhao_Mengfu._Bathing_Horses._28.1_x_155.5_cm_Detail_of_the_scroll._Palace_museum%2C_Beijing1.jpg/640px-9a_Zhao_Mengfu._Bathing_Horses._28.1_x_155.5_cm_Detail_of_the_scroll._Palace_museum%2C_Beijing1.jpg",
+      opts: [{zh:"赵孟頫",tr:"Zhao Mengfu"}, {zh:"吴道子",tr:"Wu Daozi"}, {zh:"张择端",tr:"Zhang Zeduan"}, {zh:"徐悲鸿",tr:"Xu Beihong"}],
+      ans: 0, exp: {zh:"赵孟頫深刻影响了后世文人画。",tr:"Zhao Mengfu sonraki edebiyatçı resmini etkilemiştir."}
+    },
+    match: {
+      left: [{zh:"赵孟頫",tr:"Zhao Mengfu"}, {zh:"黄公望",tr:"Huang Gongwang"}, {zh:"倪瓒",tr:"Ni Zan"}],
+      right: [{zh:"古意、书画同源",tr:"Eski anlam, hat-resim"}, {zh:"富春山居图",tr:"Fuchun Dağları"}, {zh:"一河两岸、逸笔草草",tr:"Bir nehir iki kıyı"}],
+      pairs: [0,1,2]
+    },
+    quiz: [
+      { q: {zh:"下图与哪位元代书画家的风格传统相关？",tr:"Bu eser hangi Yuan sanatçısının geleneğiyle ilişkilidir?"}, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/9a_Zhao_Mengfu._Bathing_Horses._28.1_x_155.5_cm_Detail_of_the_scroll._Palace_museum%2C_Beijing1.jpg/640px-9a_Zhao_Mengfu._Bathing_Horses._28.1_x_155.5_cm_Detail_of_the_scroll._Palace_museum%2C_Beijing1.jpg", opts: [{zh:"赵孟頫",tr:"Zhao Mengfu"}, {zh:"吴道子",tr:"Wu Daozi"}, {zh:"张择端",tr:"Zhang Zeduan"}, {zh:"徐悲鸿",tr:"Xu Beihong"}], ans: 0, exp: {zh:"赵孟頫擅长鞍马、山水，书画合一。",tr:"Zhao Mengfu at ve manzarada ustadır."} },
+      { q: {zh:"元四家中以《富春山居图》著称的是？",tr:"Fuchun eseriyle ünlü Yuan ustası kimdir?"}, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/%E9%BB%83%E5%85%AC%E6%9C%9B%E5%83%8F.jpg/640px-%E9%BB%83%E5%85%AC%E6%9C%9B%E5%83%8F.jpg", opts: [{zh:"黄公望",tr:"Huang Gongwang"}, {zh:"倪瓒",tr:"Ni Zan"}, {zh:"王蒙",tr:"Wang Meng"}, {zh:"吴镇",tr:"Wu Zhen"}], ans: 0, exp: {zh:"黄公望是元四家之首。",tr:"Huang Gongwang Dört Usta’nın önde gelenidir."} },
+      { q: {zh:"元代文人画兴盛的重要背景是？",tr:"Yuan edebiyatçı resminin arka planı nedir?"}, opts: [{zh:"部分士人远离仕途、寄情书画",tr:"Aydınların memuriyetten uzaklaşıp resme yönelmesi"}, {zh:"油画传入",tr:"Yağlıboyanın girişi"}, {zh:"摄影发明",tr:"Fotoğrafın icadı"}, {zh:"完全禁止绘画",tr:"Resmin yasaklanması"}], ans: 0, exp: {zh:"部分汉族文人选择隐逸，以书画自娱与表达。",tr:"Bazı Han aydınlar münzeviliği seçmiş, resimle ifade etmiştir."} }
+    ],
+    style: {
+      q: {zh:"简淡构图、干笔枯墨、强调逸笔与隐逸的山水，主要属于？",tr:"Yalın, kuru mürekkepli münzevi manzaralar hangi döneme aittir?"},
+      img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/9a_Zhao_Mengfu._Bathing_Horses._28.1_x_155.5_cm_Detail_of_the_scroll._Palace_museum%2C_Beijing1.jpg/640px-9a_Zhao_Mengfu._Bathing_Horses._28.1_x_155.5_cm_Detail_of_the_scroll._Palace_museum%2C_Beijing1.jpg",
+      opts: [{zh:"元代",tr:"Yuan"}, {zh:"秦代",tr:"Qin"}, {zh:"唐代",tr:"Tang"}, {zh:"近现代",tr:"Modern"}],
+      ans: 0, exp: {zh:"元代文人山水以简淡、逸笔为鲜明特征。",tr:"Yuan edebiyatçı manzarası yalınlık ve serbest fırçayla belirgindir."}
+    }
+  },
+  /* 7 明清 */
+  {
+    emoji: "📜", color: "#6B3A2A",
+    arts: [
+      { title: {zh:"明清山水与花鸟传统",tr:"Ming-Qing manzara ve çiçek-kuş"}, desc: {zh:"明清流派纷呈：吴门、松江、四王、四僧、扬州八怪等。大写意花鸟（徐渭、八大山人）影响巨大，版画亦深入民间。",tr:"Ming-Qing’da okullar çeşitlenmiş; yazımsı çiçek-kuş ve baskı gelişmiştir."}, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Travelers_Among_Mountains_and_Streams.png/480px-Travelers_Among_Mountains_and_Streams.png" },
+      { title: {zh:"正统与个性并置",tr:"Resmiyet ve bireysellik"}, desc: {zh:"四王代表正统山水，八大、石涛等则强调个性与遗民情感，构成明清绘画史的张力。",tr:"Dört Wang resmiyeti, Bada ve Shitao bireyselliği temsil eder."}, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Along_the_River_During_the_Qingming_Festival_%28detail_of_original%29.jpg/640px-Along_the_River_During_the_Qingming_Festival_%28detail_of_original%29.jpg" },
+      { title: {zh:"版画与民间美术",tr:"Baskı ve halk sanatı"}, desc: {zh:"小说戏曲插图、年画等使版画深入日常生活，技术与艺术水平在明清达到高峰。",tr:"Roman illüstrasyonu ve yılbaşı resimleri baskıyı halka yaymıştır."}, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Shang_dynasty_bronze_ding.jpg/480px-Shang_dynasty_bronze_ding.jpg" }
+    ],
+    identify: {
+      q: {zh:"以大写意花鸟著称、风格奔放的明清画家代表有？",tr:"Büyük yazımsı çiçek-kuş üslubuyla ünlü Ming-Qing ressamları?"},
+      img: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Travelers_Among_Mountains_and_Streams.png/480px-Travelers_Among_Mountains_and_Streams.png",
+      opts: [{zh:"徐渭、八大山人",tr:"Xu Wei, Bada Shanren"}, {zh:"范宽、郭熙",tr:"Fan Kuan, Guo Xi"}, {zh:"吴道子",tr:"Wu Daozi"}, {zh:"张择端",tr:"Zhang Zeduan"}],
+      ans: 0, exp: {zh:"徐渭与八大山人是大写意花鸟的重要代表。",tr:"Xu Wei ve Bada Shanren yazımsı çiçek-kuşun temsilcileridir."}
+    },
+    match: {
+      left: [{zh:"吴门画派",tr:"Wu Okulu"}, {zh:"四王",tr:"Dört Wang"}, {zh:"扬州八怪",tr:"Yangzhou Sekiz Garip"}],
+      right: [{zh:"明代苏州文人画",tr:"Ming Suzhou edebiyatçı"}, {zh:"清代正统山水",tr:"Qing resmi manzara"}, {zh:"清代个性写意",tr:"Qing kişisel yazımsı"}],
+      pairs: [0,1,2]
+    },
+    quiz: [
+      { q: {zh:"“四王”主要活跃于哪个朝代？",tr:"Dört Wang hangi hanedanda etkin olmuştur?"}, opts: [{zh:"清代",tr:"Qing"}, {zh:"唐代",tr:"Tang"}, {zh:"宋代",tr:"Song"}, {zh:"秦代",tr:"Qin"}], ans: 0, exp: {zh:"四王是清初正统派山水画家的代表。",tr:"Dört Wang erken Qing resmi manzara okuludur."} },
+      { q: {zh:"明清版画常见于？",tr:"Ming-Qing baskı nerelerde yaygındır?"}, opts: [{zh:"小说戏曲插图与年画",tr:"Roman illüstrasyonu ve yılbaşı resmi"}, {zh:"仅皇家档案",tr:"Yalnız arşiv"}, {zh:"现代广告",tr:"Modern reklam"}, {zh:"摄影集",tr:"Fotoğraf albümü"}], ans: 0, exp: {zh:"版画广泛用于书籍插图和民间年画。",tr:"Baskı kitap ve halk yılbaşı resimlerinde yaygındır."} },
+      { q: {zh:"八大山人的绘画风格特点是？",tr:"Bada Shanren’in üslubu nedir?"}, opts: [{zh:"简约、奇倔、写意",tr:"Yalın, tuhaf-güçlü, yazımsı"}, {zh:"完全写实院体",tr:"Tam gerçekçi akademi"}, {zh:"只画兵马俑",tr:"Yalnız terracotta"}, {zh:"西方油画",tr:"Batı yağlıboyası"}], ans: 0, exp: {zh:"八大以简练奇崛的花鸟与山水著称。",tr:"Bada yalın ve tuhaf güçteki eserleriyle ünlüdür."} }
+    ],
+    style: {
+      q: {zh:"流派纷呈、写意花鸟奔放、版画繁荣，主要属于？",tr:"Okul çeşitliliği ve yazımsı çiçek-kuş hangi döneme aittir?"},
+      img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Along_the_River_During_the_Qingming_Festival_%28detail_of_original%29.jpg/640px-Along_the_River_During_the_Qingming_Festival_%28detail_of_original%29.jpg",
+      opts: [{zh:"明清",tr:"Ming-Qing"}, {zh:"史前",tr:"Tarih öncesi"}, {zh:"商周",tr:"Shang-Zhou"}, {zh:"秦代",tr:"Qin"}],
+      ans: 0, exp: {zh:"明清是传统绘画流派与民间版画高度发展的时期。",tr:"Ming-Qing resim okulları ve halk baskısının yüksek dönemidir."}
+    }
+  },
+  /* 8 近现代 */
+  {
+    emoji: "🌅", color: "#1A3A5C",
+    arts: [
+      { title: {zh:"徐悲鸿《奔马》传统",tr:"Xu Beihong – koşan atlar"}, desc: {zh:"徐悲鸿主张中西融合，以写实改良中国画，奔马题材影响广泛，并推动现代美术教育，是近现代教材必选人物。",tr:"Xu Beihong Doğu-Batı kaynaşmasını savundu; koşan atlarıyla ünlüdür."}, img: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Horse_Standing_by_Xu_Beihong%2C_1940.jpg" },
+      { title: {zh:"徐悲鸿鞍马作品",tr:"Xu Beihong at resmi"}, desc: {zh:"将西方写实结构与中国水墨笔意结合，体现20世纪中国画转型的一条重要路径。",tr:"Batı gerçekçiliği ile Çin mürekkep geleneğini birleştirir."}, img: "https://upload.wikimedia.org/wikipedia/commons/f/fd/The_eight_horses_%28Xu_Beihong%29.jpg" },
+      { title: {zh:"近现代转型与多元探索",tr:"Modern dönüşüm"}, desc: {zh:"齐白石大写意花鸟、林风眠形式探索等，与徐悲鸿写实改良共同构成近现代中国画的多元面貌。",tr:"Qi Baishi, Lin Fengmian ve Xu Beihong modern Çin resminin çeşitliliğini oluşturur."}, img: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Horse_Standing_by_Xu_Beihong%2C_1940.jpg" }
+    ],
+    identify: {
+      q: {zh:"下图奔马题材、中西融合风格的近现代画家是？",tr:"Bu koşan at üslubu hangi modern ressama aittir?"},
+      img: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Horse_Standing_by_Xu_Beihong%2C_1940.jpg",
+      opts: [{zh:"徐悲鸿",tr:"Xu Beihong"}, {zh:"顾恺之",tr:"Gu Kaizhi"}, {zh:"范宽",tr:"Fan Kuan"}, {zh:"倪瓒",tr:"Ni Zan"}],
+      ans: 0, exp: {zh:"徐悲鸿以奔马和写实改良影响20世纪中国画。",tr:"Xu Beihong koşan atları ve gerçekçi yenilemesiyle etkilidir."}
+    },
+    match: {
+      left: [{zh:"徐悲鸿",tr:"Xu Beihong"}, {zh:"齐白石",tr:"Qi Baishi"}, {zh:"林风眠",tr:"Lin Fengmian"}],
+      right: [{zh:"奔马、中西融合",tr:"Koşan at, Doğu-Batı"}, {zh:"花鸟虫鱼大写意",tr:"Çiçek-kuş büyük yazımsı"}, {zh:"形式与意境融合",tr:"Biçim ve atmosfer"}],
+      pairs: [0,1,2]
+    },
+    quiz: [
+      { q: {zh:"下图奔马作品体现了谁的艺术主张？",tr:"Bu koşan at eseri kimin anlayışını yansıtır?"}, img: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Horse_Standing_by_Xu_Beihong%2C_1940.jpg", opts: [{zh:"徐悲鸿 · 中西融合与写实改良",tr:"Xu Beihong · Doğu-Batı ve gerçekçilik"}, {zh:"顾恺之 · 仅传神",tr:"Gu Kaizhi"}, {zh:"范宽 · 仅北方山水",tr:"Fan Kuan"}, {zh:"张择端 · 仅市井",tr:"Zhang Zeduan"}], ans: 0, exp: {zh:"徐悲鸿主张以写实改良中国画。",tr:"Xu Beihong gerçekçilikle Çin resmini yenilemeyi savundu."} },
+      { q: {zh:"齐白石最擅长的题材是？",tr:"Qi Baishi’nin en usta olduğu konular?"}, opts: [{zh:"花鸟虫鱼",tr:"Çiçek, kuş, böcek, balık"}, {zh:"兵马俑写生",tr:"Terracotta çizimi"}, {zh:"工业革命场景",tr:"Sanayi sahneleri"}, {zh:"抽象色块",tr:"Soyut renk"}], ans: 0, exp: {zh:"齐白石以大写意花鸟虫鱼闻名。",tr:"Qi Baishi yazımsı çiçek-kuş-böcek-balık ile ünlüdür."} },
+      { q: {zh:"下图八骏一类作品与哪位画家相关？",tr:"Bu at grubu eseri kime aittir?"}, img: "https://upload.wikimedia.org/wikipedia/commons/f/fd/The_eight_horses_%28Xu_Beihong%29.jpg", opts: [{zh:"徐悲鸿",tr:"Xu Beihong"}, {zh:"吴道子",tr:"Wu Daozi"}, {zh:"张择端",tr:"Zhang Zeduan"}, {zh:"黄公望",tr:"Huang Gongwang"}], ans: 0, exp: {zh:"徐悲鸿鞍马题材影响广泛。",tr:"Xu Beihong’un at konuları geniş etki yaratmıştır."} }
+    ],
+    style: {
+      q: {zh:"中西融合、写实改良与大写意并存，主要属于？",tr:"Doğu-Batı kaynaşması ve yazımsı üslubun birlikte varlığı hangi döneme aittir?"},
+      img: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Horse_Standing_by_Xu_Beihong%2C_1940.jpg",
+      opts: [{zh:"近现代",tr:"Modern"}, {zh:"商周",tr:"Shang-Zhou"}, {zh:"秦代",tr:"Qin"}, {zh:"魏晋",tr:"Wei-Jin"}],
+      ans: 0, exp: {zh:"近现代是中国画在传统与西方影响下转型探索的关键时期。",tr:"Modern dönem Çin resminin dönüşüm arayışıdır."}
+    }
+  }
+];
+
+const FINAL_QUIZ = [
+  { q: {zh:"下图兵马俑是哪个朝代的代表作？",tr:"Bu Terracotta Ordusu hangi hanedanın eseridir?"}, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Terracotta_Army%2C_Xi%27an%2C_China.jpg/640px-Terracotta_Army%2C_Xi%27an%2C_China.jpg", opts: [{zh:"秦",tr:"Qin"}, {zh:"唐",tr:"Tang"}, {zh:"宋",tr:"Song"}, {zh:"明",tr:"Ming"}], ans: 0, exp: {zh:"秦始皇陵兵马俑是秦代雕塑的巅峰。",tr:"Terracotta Ordusu Qin heykelinin zirvesidir."} },
+  { q: {zh:"下图长卷《清明上河图》的作者是？",tr:"Bu Qingming Shanghe Tu’nun ressamı kimdir?"}, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Along_the_River_During_the_Qingming_Festival_%28detail_of_original%29.jpg/640px-Along_the_River_During_the_Qingming_Festival_%28detail_of_original%29.jpg", opts: [{zh:"张择端",tr:"Zhang Zeduan"}, {zh:"赵孟頫",tr:"Zhao Mengfu"}, {zh:"徐悲鸿",tr:"Xu Beihong"}, {zh:"顾恺之",tr:"Gu Kaizhi"}], ans: 0, exp: {zh:"北宋张择端所作。",tr:"Kuzey Song’dan Zhang Zeduan."} },
+  { q: {zh:"下图《溪山行旅图》的作者是？",tr:"Bu Dağ ve Dere Yolculuğu’nun ressamı kimdir?"}, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Travelers_Among_Mountains_and_Streams.png/480px-Travelers_Among_Mountains_and_Streams.png", opts: [{zh:"范宽",tr:"Fan Kuan"}, {zh:"吴道子",tr:"Wu Daozi"}, {zh:"齐白石",tr:"Qi Baishi"}, {zh:"徐悲鸿",tr:"Xu Beihong"}], ans: 0, exp: {zh:"范宽北方山水经典。",tr:"Fan Kuan’ın kuzey manzara klasiğidir."} },
+  { q: {zh:"下图彩陶属于哪种史前文化？",tr:"Bu boyalı seramik hangi kültüredir?"}, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Yangshao_Culture_Pottery_21.jpg/640px-Yangshao_Culture_Pottery_21.jpg", opts: [{zh:"仰韶文化",tr:"Yangshao"}, {zh:"油画传统",tr:"Yağlıboya"}, {zh:"商周青铜",tr:"Shang bronz"}, {zh:"秦兵马俑",tr:"Qin terracotta"}], ans: 0, exp: {zh:"仰韶文化以彩绘陶器为标志。",tr:"Yangshao boyalı seramikleriyle tanınır."} },
+  { q: {zh:"下图青铜礼器常见于哪个时期？",tr:"Bu bronz ritüel kap hangi dönemde yaygındır?"}, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Shang_dynasty_bronze_ding.jpg/480px-Shang_dynasty_bronze_ding.jpg", opts: [{zh:"商周",tr:"Shang-Zhou"}, {zh:"唐代",tr:"Tang"}, {zh:"近现代",tr:"Modern"}, {zh:"史前岩画",tr:"Tarih öncesi kaya"}], ans: 0, exp: {zh:"商周青铜礼器以饕餮纹等为典型。",tr:"Shang-Zhou bronzları taotie ile tipiktir."} },
+  { q: {zh:"下图T形帛画出土于马王堆，属于哪个朝代？",tr:"Bu T biçimli ipek resim hangi hanedandandır?"}, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Western_Han_Chinese_Silk.JPG/480px-Western_Han_Chinese_Silk.JPG", opts: [{zh:"汉代",tr:"Han"}, {zh:"商代",tr:"Shang"}, {zh:"唐代",tr:"Tang"}, {zh:"清代",tr:"Qing"}], ans: 0, exp: {zh:"马王堆汉墓帛画是汉代绘画重要遗存。",tr:"Mawangdui ipek resim Han döneminedir."} },
+  { q: {zh:"下图奔马体现了哪位近现代画家的风格？",tr:"Bu koşan at hangi modern ressama aittir?"}, img: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Horse_Standing_by_Xu_Beihong%2C_1940.jpg", opts: [{zh:"徐悲鸿",tr:"Xu Beihong"}, {zh:"齐白石",tr:"Qi Baishi"}, {zh:"林风眠",tr:"Lin Fengmian"}, {zh:"张大千",tr:"Zhang Daqian"}], ans: 0, exp: {zh:"徐悲鸿主张中西融合与写实改良。",tr:"Xu Beihong Doğu-Batı ve gerçekçiliği savundu."} },
+  { q: {zh:"文人画在哪个朝代得到重要发展？",tr:"Edebiyatçı resmi hangi hanedanda gelişmiştir?"}, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/9a_Zhao_Mengfu._Bathing_Horses._28.1_x_155.5_cm_Detail_of_the_scroll._Palace_museum%2C_Beijing1.jpg/640px-9a_Zhao_Mengfu._Bathing_Horses._28.1_x_155.5_cm_Detail_of_the_scroll._Palace_museum%2C_Beijing1.jpg", opts: [{zh:"元（及宋明）",tr:"Yuan (ve Song-Ming)"}, {zh:"秦",tr:"Qin"}, {zh:"商",tr:"Shang"}, {zh:"史前",tr:"Tarih öncesi"}], ans: 0, exp: {zh:"元代文人画高度发展。",tr:"Yuan’da edebiyatçı resmi yüksek gelişim göstermiştir."} }
+];
+
+/* ===================== SOUND (Web Audio, offline-friendly) ===================== */
+let audioCtx = null;
+let soundEnabled = true;
+
+function ensureAudio() {
+  if (!audioCtx) {
+    try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
+    catch (e) { soundEnabled = false; }
+  }
+  if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume().catch(() => {});
+  return audioCtx;
+}
+function tone(freq, duration, type, vol, when) {
+  const ctx = ensureAudio();
+  if (!ctx || !soundEnabled) return;
+  const t0 = (when != null ? when : 0) + ctx.currentTime;
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+  osc.type = type || 'sine';
+  osc.frequency.setValueAtTime(freq, t0);
+  gain.gain.setValueAtTime(0.0001, t0);
+  gain.gain.exponentialRampToValueAtTime(vol || 0.15, t0 + 0.02);
+  gain.gain.exponentialRampToValueAtTime(0.0001, t0 + duration);
+  osc.connect(gain);
+  gain.connect(ctx.destination);
+  osc.start(t0);
+  osc.stop(t0 + duration + 0.05);
+}
+function playSound(name) {
+  if (!soundEnabled) return;
+  ensureAudio();
+  switch (name) {
+    case 'click':
+      tone(520, 0.06, 'sine', 0.07); break;
+    case 'correct':
+      tone(523.25, 0.12, 'sine', 0.13);
+      tone(659.25, 0.14, 'sine', 0.11, 0.1);
+      tone(783.99, 0.22, 'sine', 0.11, 0.2); break;
+    case 'wrong':
+      tone(220, 0.18, 'triangle', 0.09);
+      tone(175, 0.28, 'triangle', 0.07, 0.12); break;
+    case 'match':
+      tone(440, 0.08, 'sine', 0.09);
+      tone(660, 0.12, 'sine', 0.09, 0.07); break;
+    case 'match-done':
+      tone(392, 0.1, 'sine', 0.11);
+      tone(494, 0.1, 'sine', 0.11, 0.1);
+      tone(587, 0.12, 'sine', 0.11, 0.2);
+      tone(784, 0.28, 'sine', 0.13, 0.32); break;
+    case 'reward':
+      tone(660, 0.08, 'sine', 0.09);
+      tone(880, 0.15, 'sine', 0.09, 0.08); break;
+    case 'level-complete':
+      tone(523, 0.12, 'sine', 0.11);
+      tone(659, 0.12, 'sine', 0.11, 0.12);
+      tone(784, 0.12, 'sine', 0.11, 0.24);
+      tone(1047, 0.35, 'sine', 0.13, 0.38); break;
+    case 'unlock':
+      tone(440, 0.1, 'sine', 0.09);
+      tone(554, 0.1, 'sine', 0.09, 0.1);
+      tone(659, 0.15, 'sine', 0.11, 0.2);
+      tone(880, 0.28, 'triangle', 0.09, 0.32); break;
+    case 'final-win':
+      [523, 659, 784, 1047, 1319].forEach((f, i) => tone(f, 0.18, 'sine', 0.1, i * 0.11)); break;
+  }
+}
+function toggleSound() {
+  soundEnabled = !soundEnabled;
+  const btn = document.getElementById('sound-btn');
+  if (btn) btn.textContent = soundEnabled ? '🔊' : '🔇';
+  if (soundEnabled) { ensureAudio(); playSound('click'); }
+}
+
+/* ===================== STATE ===================== */
+let lang = 'zh';
+let score = 0, coins = 0, stars = 0;
+let unlocked = 1; // levels with index < unlocked are open (0 is always open at start)
+let completed = Array(9).fill(false);
+let currentLevel = -1;
+let levelProgress = {}; // track which activities done per level
+let finalCorrect = 0, finalTotal = 0;
+
+function t(key) {
+  const L = LANG[lang];
+  if (key.includes('.')) {
+    const [a,b] = key.split('.');
+    return L[a] && L[a][b] !== undefined ? L[a][b] : key;
+  }
+  return L[key] !== undefined ? L[key] : key;
+}
+function tt(obj) {
+  if (!obj) return '';
+  return obj[lang] || obj.zh || '';
+}
+
+/* ===================== UI HELPERS ===================== */
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+function updateStats() {
+  ['home','lv','fn'].forEach(p => {
+    const s = document.getElementById(p+'-stars');
+    const c = document.getElementById(p+'-coins');
+    const sc = document.getElementById(p+'-score');
+    if (s) s.textContent = stars;
+    if (c) c.textContent = coins;
+    if (sc) sc.textContent = score;
+  });
+  const prog = document.getElementById('home-progress');
+  if (prog) prog.style.width = (completed.filter(Boolean).length / 9 * 100) + '%';
+}
+function addReward(s=0, c=0, sc=0) {
+  stars += s; coins += c; score += sc;
+  updateStats();
+  if (s > 0 || c >= 5) playSound('reward');
+}
+
+/* ===================== LANGUAGE ===================== */
+function setLang(l) {
+  lang = l;
+  ensureAudio();
+  playSound('click');
+  document.documentElement.lang = l === 'zh' ? 'zh' : 'tr';
+  document.getElementById('home-title').textContent = t('title');
+  document.getElementById('home-desc').textContent = t('homeDesc');
+  document.getElementById('final-btn').textContent = t('finalChallenge');
+  document.getElementById('reset-btn').textContent = t('resultReset');
+  document.getElementById('footer-note').textContent = t('footer');
+  document.getElementById('complete-level-btn').textContent = t('complete');
+  document.getElementById('result-title').textContent = t('resultTitle');
+  document.getElementById('result-home').textContent = t('resultHome');
+  document.getElementById('result-reset').textContent = t('resultReset');
+  document.querySelectorAll('[data-i18n="back"]').forEach(el => el.textContent = t('back'));
+  const tip = document.getElementById('unlock-tip');
+  if (tip) {
+    tip.textContent = lang === 'zh'
+      ? '提示：关卡需按顺序解锁。进入第一关后，请完成「作品欣赏、识别、配对、问答、风格辨认」全部五个环节，页面底部会出现「完成本关」按钮，点击后即可解锁下一关。'
+      : 'İpucu: Seviyeler sırayla açılır. İlk seviyede beş etkinliğin hepsini (İnceleme, Tanıma, Eşleştirme, Yarışma, Üslup) bitirin; sayfanın altında «Seviyeyi Bitir» düğmesi çıkar, tıklayınca sonraki seviye açılır.';
+  }
+  renderLevels();
+  showScreen('home-screen');
+  updateStats();
+}
+function showLang() { showScreen('lang-screen'); }
+
+/* ===================== HOME ===================== */
+function renderLevels() {
+  const grid = document.getElementById('level-grid');
+  grid.innerHTML = '';
+  LANG[lang].levels.forEach((lv, i) => {
+    const card = document.createElement('div');
+    card.className = 'level-card' + (i >= unlocked ? ' locked' : '') + (completed[i] ? ' completed' : '');
+    const L = LEVELS[i];
+    card.innerHTML = `
+      <div class="cover" style="background:${L.color}22">
+        ${i >= unlocked ? '<div class="lock-icon">🔒</div>' : `<div class="emoji">${L.emoji}</div>`}
+        ${completed[i] ? '<span class="badge">' + t('completed') + '</span>' : (i < unlocked ? '<span class="badge">' + (i+1) + '</span>' : '')}
+      </div>
+      <div class="info">
+        <h3>${lv.name}</h3>
+        <p>${lv.desc}</p>
+      </div>
+    `;
+    if (i < unlocked) card.onclick = () => startLevel(i);
+    else card.onclick = () => alert(t('locked'));
+    grid.appendChild(card);
+  });
+  document.getElementById('final-btn').disabled = !completed.every(Boolean);
+}
+function goHome() {
+  renderLevels();
+  updateStats();
+  showScreen('home-screen');
+}
+function resetGame() {
+  if (!confirm(t('resetConfirm'))) return;
+  score = 0; coins = 0; stars = 0;
+  unlocked = 1;
+  completed = Array(9).fill(false);
+  levelProgress = {};
+  updateStats();
+  renderLevels();
+  showScreen('home-screen');
+}
+
+/* ===================== LEVEL ===================== */
+function startLevel(idx) {
+  currentLevel = idx;
+  if (!levelProgress[idx]) levelProgress[idx] = { explore: false, identify: false, match: false, quiz: false, style: false };
+  const L = LEVELS[idx];
+  const lvName = LANG[lang].levels[idx];
+  document.getElementById('lv-title').textContent = (idx+1) + '. ' + lvName.name;
+  document.getElementById('lv-desc').textContent = lvName.desc;
+  // tabs
+  const tabs = document.getElementById('level-tabs');
+  const panels = document.getElementById('level-panels');
+  const tabNames = ['explore','identify','match','quiz','style'];
+  tabs.innerHTML = '';
+  panels.innerHTML = '';
+  tabNames.forEach((name, ti) => {
+    const btn = document.createElement('button');
+    btn.className = 'tab-btn' + (ti===0 ? ' active' : '');
+    btn.textContent = t(name);
+    btn.onclick = () => {
+      tabs.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      panels.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('panel-'+name).classList.add('active');
+    };
+    tabs.appendChild(btn);
+    const panel = document.createElement('div');
+    panel.className = 'panel' + (ti===0 ? ' active' : '');
+    panel.id = 'panel-'+name;
+    panels.appendChild(panel);
+  });
+  // fill panels
+  fillExplore(idx);
+  fillIdentify(idx);
+  fillMatch(idx);
+  fillQuiz(idx);
+  fillStyle(idx);
+  checkLevelCompleteBtn();
+  updateStats();
+  showScreen('level-screen');
+}
+
+function fillExplore(idx) {
+  const panel = document.getElementById('panel-explore');
+  const L = LEVELS[idx];
+  let html = '<div class="explore-grid">';
+  L.arts.forEach((a, ai) => {
+    html += `<div class="art-card" onclick="showArt(${idx},${ai})">
+      <div class="img-wrap">${a.img ? `<img src="${a.img}" alt="" onerror="this.parentElement.innerHTML='<div class=placeholder>${LEVELS[idx].emoji}</div>'">` : `<div class="placeholder">${LEVELS[idx].emoji}</div>`}</div>
+      <div class="body"><h4>${tt(a.title)}</h4><p>${tt(a.desc).slice(0,60)}…</p></div>
+    </div>`;
+  });
+  html += '</div><p style="margin-top:12px;color:var(--soft-ink);font-size:0.9rem">' + (lang==='zh'?'点击卡片查看详情。':'Kartlara tıklayarak detayları görün.') + '</p>';
+  panel.innerHTML = html;
+  levelProgress[idx].explore = true;
+  checkLevelCompleteBtn();
+}
+function showArt(li, ai) {
+  const a = LEVELS[li].arts[ai];
+  document.getElementById('modal-title').textContent = tt(a.title);
+  document.getElementById('modal-body').textContent = tt(a.desc);
+  const imgBox = document.getElementById('modal-img');
+  if (a.img) imgBox.innerHTML = `<img src="${a.img}" alt="" style="max-width:100%" onerror="this.style.display='none'">`;
+  else imgBox.innerHTML = `<div style="font-size:4rem;text-align:center">${LEVELS[li].emoji}</div>`;
+  document.getElementById('modal').classList.add('show');
+}
+function closeModal() { document.getElementById('modal').classList.remove('show'); }
+
+function artImageHtml(src, emoji, alt) {
+  if (src) {
+    return `<div class="q-img-wrap"><img class="q-img" src="${src}" alt="${alt || ''}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'q-img-fallback\\'>${emoji || '🖼️'}</div>'"></div>`;
+  }
+  return `<div class="q-img-wrap"><div class="q-img-fallback">${emoji || '🖼️'}</div></div>`;
+}
+
+function fillIdentify(idx) {
+  const panel = document.getElementById('panel-identify');
+  const id = LEVELS[idx].identify;
+  const imgSrc = id.img || (LEVELS[idx].arts[0] && LEVELS[idx].arts[0].img) || null;
+  panel.innerHTML = `
+    <p style="margin-bottom:12px;color:var(--ink-soft)">${t('identifyHint')}</p>
+    ${artImageHtml(imgSrc, LEVELS[idx].emoji, tt(id.q))}
+    <div class="quiz-q">${tt(id.q)}</div>
+    <div class="options" id="id-opts"></div>
+    <div class="feedback" id="id-fb"></div>
+  `;
+  const opts = document.getElementById('id-opts');
+  id.opts.forEach((o, i) => {
+    const b = document.createElement('button');
+    b.className = 'opt';
+    b.textContent = tt(o);
+    b.onclick = () => {
+      if (b.classList.contains('disabled')) return;
+      opts.querySelectorAll('.opt').forEach(x => x.classList.add('disabled'));
+      const fb = document.getElementById('id-fb');
+      if (i === id.ans) {
+        b.classList.add('correct');
+        fb.className = 'feedback show ok';
+        fb.innerHTML = `<strong>${t('correct')}</strong> ${t('explanation')}${tt(id.exp)}`;
+        playSound('correct');
+        addReward(1, 5, 10);
+        levelProgress[idx].identify = true;
+      } else {
+        b.classList.add('wrong');
+        opts.children[id.ans].classList.add('correct');
+        fb.className = 'feedback show no';
+        fb.innerHTML = `<strong>${t('wrong')}</strong> ${t('explanation')}${tt(id.exp)}`;
+        playSound('wrong');
+        addReward(0, 0, 2);
+        levelProgress[idx].identify = true;
+      }
+      checkLevelCompleteBtn();
+    };
+    opts.appendChild(b);
+  });
+}
+
+function fillMatch(idx) {
+  const panel = document.getElementById('panel-match');
+  const m = LEVELS[idx].match;
+  panel.innerHTML = `
+    <p style="margin-bottom:12px;color:var(--soft-ink)">${t('matchHint')}</p>
+    <div class="match-area">
+      <div class="match-col" id="match-left"></div>
+      <div class="match-col" id="match-right"></div>
+    </div>
+    <div class="feedback" id="match-fb"></div>
+  `;
+  let selectedLeft = null, selectedRight = null;
+  const matched = new Set();
+  const leftEl = document.getElementById('match-left');
+  const rightEl = document.getElementById('match-right');
+  // shuffle right order for display
+  const rightOrder = m.right.map((_,i)=>i).sort(()=>Math.random()-0.5);
+  m.left.forEach((item, i) => {
+    const d = document.createElement('div');
+    d.className = 'match-item';
+    d.textContent = tt(item);
+    d.dataset.idx = i;
+    d.onclick = () => {
+      if (matched.has(i)) return;
+      leftEl.querySelectorAll('.match-item').forEach(x => x.classList.remove('selected'));
+      d.classList.add('selected');
+      selectedLeft = i;
+      tryMatch();
+    };
+    leftEl.appendChild(d);
+  });
+  rightOrder.forEach(ri => {
+    const d = document.createElement('div');
+    d.className = 'match-item';
+    d.textContent = tt(m.right[ri]);
+    d.dataset.idx = ri;
+    d.onclick = () => {
+      if (matched.has(m.pairs.indexOf(ri) >= 0 ? m.pairs.findIndex(p=>p===ri) : -1) && false) return;
+      // check if this right already matched
+      const leftIdx = m.pairs.indexOf(ri);
+      if (matched.has(leftIdx)) return;
+      rightEl.querySelectorAll('.match-item').forEach(x => x.classList.remove('selected'));
+      d.classList.add('selected');
+      selectedRight = ri;
+      tryMatch();
+    };
+    rightEl.appendChild(d);
+  });
+  function tryMatch() {
+    if (selectedLeft === null || selectedRight === null) return;
+    const correctRight = m.pairs[selectedLeft];
+    if (selectedRight === correctRight) {
+      matched.add(selectedLeft);
+      leftEl.querySelector(`[data-idx="${selectedLeft}"]`).classList.add('matched');
+      rightEl.querySelector(`[data-idx="${selectedRight}"]`).classList.add('matched');
+      leftEl.querySelector(`[data-idx="${selectedLeft}"]`).classList.remove('selected');
+      rightEl.querySelector(`[data-idx="${selectedRight}"]`).classList.remove('selected');
+      playSound('match');
+      addReward(0, 3, 5);
+      selectedLeft = selectedRight = null;
+      if (matched.size === m.left.length) {
+        document.getElementById('match-fb').className = 'feedback show ok';
+        document.getElementById('match-fb').innerHTML = `<strong>${t('matchDone')}</strong>`;
+        levelProgress[idx].match = true;
+        playSound('match-done');
+        addReward(1, 5, 10);
+        checkLevelCompleteBtn();
+      }
+    } else {
+      playSound('wrong');
+      leftEl.querySelector(`[data-idx="${selectedLeft}"]`).classList.remove('selected');
+      rightEl.querySelector(`[data-idx="${selectedRight}"]`).classList.remove('selected');
+      selectedLeft = selectedRight = null;
+    }
+  }
+}
+
+function fillQuiz(idx) {
+  const panel = document.getElementById('panel-quiz');
+  const questions = LEVELS[idx].quiz;
+  let qi = 0;
+  let correctCount = 0;
+  function renderQ() {
+    if (qi >= questions.length) {
+      panel.innerHTML = `<div class="feedback show ok"><strong>${lang==='zh'?'本关问答完成！':'Bu seviyedeki sorular tamamlandı!'}</strong> ${correctCount}/${questions.length}</div>`;
+      levelProgress[idx].quiz = true;
+      playSound(correctCount >= 2 ? 'correct' : 'click');
+      addReward(correctCount >= 2 ? 1 : 0, correctCount * 3, correctCount * 8);
+      checkLevelCompleteBtn();
+      return;
+    }
+    const q = questions[qi];
+    const qImg = q.img ? artImageHtml(q.img, LEVELS[idx].emoji, tt(q.q)) : '';
+    panel.innerHTML = `
+      <p style="color:var(--ink-soft);margin-bottom:8px">${qi+1}/${questions.length}</p>
+      ${qImg}
+      <div class="quiz-q">${tt(q.q)}</div>
+      <div class="options" id="quiz-opts"></div>
+      <div class="feedback" id="quiz-fb"></div>
+      <div class="mt-16" id="quiz-next" style="display:none"><button class="btn btn-primary" id="quiz-next-btn">${t('next')}</button></div>
+    `;
+    const opts = document.getElementById('quiz-opts');
+    q.opts.forEach((o, i) => {
+      const b = document.createElement('button');
+      b.className = 'opt';
+      b.textContent = tt(o);
+      b.onclick = () => {
+        if (b.classList.contains('disabled')) return;
+        opts.querySelectorAll('.opt').forEach(x => x.classList.add('disabled'));
+        const fb = document.getElementById('quiz-fb');
+        if (i === q.ans) {
+          b.classList.add('correct');
+          fb.className = 'feedback show ok';
+          fb.innerHTML = `<strong>${t('correct')}</strong> ${t('explanation')}${tt(q.exp)}`;
+          correctCount++;
+          playSound('correct');
+          addReward(0, 2, 5);
+        } else {
+          b.classList.add('wrong');
+          opts.children[q.ans].classList.add('correct');
+          fb.className = 'feedback show no';
+          fb.innerHTML = `<strong>${t('wrong')}</strong> ${t('explanation')}${tt(q.exp)}`;
+          playSound('wrong');
+        }
+        document.getElementById('quiz-next').style.display = 'block';
+        document.getElementById('quiz-next-btn').onclick = () => { playSound('click'); qi++; renderQ(); };
+      };
+      opts.appendChild(b);
+    });
+  }
+  renderQ();
+}
+
+function fillStyle(idx) {
+  const panel = document.getElementById('panel-style');
+  const s = LEVELS[idx].style;
+  const imgSrc = s.img || (LEVELS[idx].arts[1] && LEVELS[idx].arts[1].img) || (LEVELS[idx].arts[0] && LEVELS[idx].arts[0].img) || null;
+  panel.innerHTML = `
+    <p style="margin-bottom:12px;color:var(--ink-soft)">${t('styleHint')}</p>
+    ${artImageHtml(imgSrc, LEVELS[idx].emoji, tt(s.q))}
+    <div class="quiz-q">${tt(s.q)}</div>
+    <div class="options" id="style-opts"></div>
+    <div class="feedback" id="style-fb"></div>
+  `;
+  const opts = document.getElementById('style-opts');
+  s.opts.forEach((o, i) => {
+    const b = document.createElement('button');
+    b.className = 'opt';
+    b.textContent = tt(o);
+    b.onclick = () => {
+      if (b.classList.contains('disabled')) return;
+      opts.querySelectorAll('.opt').forEach(x => x.classList.add('disabled'));
+      const fb = document.getElementById('style-fb');
+      if (i === s.ans) {
+        b.classList.add('correct');
+        fb.className = 'feedback show ok';
+        fb.innerHTML = `<strong>${t('correct')}</strong> ${t('explanation')}${tt(s.exp)}`;
+        playSound('correct');
+        addReward(1, 5, 10);
+      } else {
+        b.classList.add('wrong');
+        opts.children[s.ans].classList.add('correct');
+        fb.className = 'feedback show no';
+        fb.innerHTML = `<strong>${t('wrong')}</strong> ${t('explanation')}${tt(s.exp)}`;
+        playSound('wrong');
+        addReward(0, 0, 2);
+      }
+      levelProgress[idx].style = true;
+      checkLevelCompleteBtn();
+    };
+    opts.appendChild(b);
+  });
+}
+
+function checkLevelCompleteBtn() {
+  const p = levelProgress[currentLevel];
+  const btn = document.getElementById('complete-level-btn');
+  if (!p) { btn.style.display = 'none'; return; }
+  const done = [p.explore, p.identify, p.match, p.quiz, p.style].filter(Boolean).length;
+  // show progress hint under tabs
+  let hint = document.getElementById('level-progress-hint');
+  if (!hint) {
+    hint = document.createElement('p');
+    hint.id = 'level-progress-hint';
+    hint.style.cssText = 'margin:8px 0 4px;font-size:0.9rem;color:var(--soft-ink);';
+    document.getElementById('level-tabs').after(hint);
+  }
+  const names = lang === 'zh'
+    ? ['作品欣赏','作品识别','配对游戏','知识问答','风格辨认']
+    : ['İnceleme','Tanıma','Eşleştirme','Yarışma','Üslup'];
+  const status = [p.explore, p.identify, p.match, p.quiz, p.style]
+    .map((ok, i) => (ok ? '✓ ' : '○ ') + names[i]).join('　');
+  hint.textContent = (lang === 'zh' ? '本关进度：' : 'Seviye ilerlemesi: ') + status + `  (${done}/5)`;
+  if (p.explore && p.identify && p.match && p.quiz && p.style) {
+    btn.style.display = 'inline-flex';
+    btn.textContent = t('complete') + (lang === 'zh' ? '（解锁下一关）' : ' (Sonraki seviye açılır)');
+  } else {
+    btn.style.display = 'none';
+  }
+}
+function completeLevel() {
+  if (completed[currentLevel]) { goHome(); return; }
+  completed[currentLevel] = true;
+  playSound('level-complete');
+  setTimeout(() => playSound('unlock'), 450);
+  addReward(2, 10, 30);
+  // Unlock next level: after finishing level N, open up to N+1 (index N+1)
+  unlocked = Math.max(unlocked, currentLevel + 2);
+  if (currentLevel >= 8) unlocked = 9;
+  goHome();
+}
+
+/* ===================== FINAL ===================== */
+function startFinal() {
+  if (!completed.every(Boolean)) return;
+  finalCorrect = 0; finalTotal = FINAL_QUIZ.length;
+  let qi = 0;
+  document.getElementById('final-title').textContent = t('finalTitle');
+  const area = document.getElementById('final-quiz-area');
+  function render() {
+    if (qi >= FINAL_QUIZ.length) {
+      // results
+      const acc = Math.round(finalCorrect / finalTotal * 100);
+      score += finalCorrect * 15;
+      stars += finalCorrect >= 6 ? 3 : finalCorrect >= 4 ? 2 : 1;
+      coins += finalCorrect * 5;
+      updateStats();
+      playSound(acc >= 60 ? 'final-win' : 'level-complete');
+      document.getElementById('result-score').textContent = score;
+      document.getElementById('result-stars').textContent = '⭐'.repeat(Math.min(5, Math.floor(stars/3)+1));
+      document.getElementById('result-accuracy').textContent = t('accuracy') + ': ' + acc + '% (' + finalCorrect + '/' + finalTotal + ')';
+      document.getElementById('result-msg').textContent = lang==='zh'
+        ? (acc>=80 ? '优秀！你对中国美术史已有扎实理解。' : acc>=60 ? '良好！继续探索可以掌握更多细节。' : '继续挑战，复习各关卡知识吧！')
+        : (acc>=80 ? 'Harika! Çin sanat tarihini sağlam kavramışsınız.' : acc>=60 ? 'İyi! Daha fazla keşifle detayları pekiştirebilirsiniz.' : 'Seviyeleri gözden geçirerek devam edin!');
+      showScreen('result-screen');
+      return;
+    }
+    const q = FINAL_QUIZ[qi];
+    const qImg = q.img ? artImageHtml(q.img, '🖼️', tt(q.q)) : '';
+    area.innerHTML = `
+      <p style="color:var(--ink-soft)">${qi+1}/${FINAL_QUIZ.length}</p>
+      ${qImg}
+      <div class="quiz-q">${tt(q.q)}</div>
+      <div class="options" id="fn-opts"></div>
+      <div class="feedback" id="fn-fb"></div>
+      <div class="mt-16" id="fn-next" style="display:none"><button class="btn btn-primary">${t('next')}</button></div>
+    `;
+    const opts = document.getElementById('fn-opts');
+    q.opts.forEach((o, i) => {
+      const b = document.createElement('button');
+      b.className = 'opt';
+      b.textContent = tt(o);
+      b.onclick = () => {
+        if (b.classList.contains('disabled')) return;
+        opts.querySelectorAll('.opt').forEach(x => x.classList.add('disabled'));
+        const fb = document.getElementById('fn-fb');
+        if (i === q.ans) {
+          b.classList.add('correct');
+          fb.className = 'feedback show ok';
+          fb.innerHTML = `<strong>${t('correct')}</strong> ${t('explanation')}${tt(q.exp)}`;
+          finalCorrect++;
+          playSound('correct');
+        } else {
+          b.classList.add('wrong');
+          opts.children[q.ans].classList.add('correct');
+          fb.className = 'feedback show no';
+          fb.innerHTML = `<strong>${t('wrong')}</strong> ${t('explanation')}${tt(q.exp)}`;
+          playSound('wrong');
+        }
+        document.getElementById('fn-next').style.display = 'block';
+        document.getElementById('fn-next').querySelector('button').onclick = () => { playSound('click'); qi++; render(); };
+      };
+      opts.appendChild(b);
+    });
+  }
+  render();
+  updateStats();
+  showScreen('final-screen');
+}
+
+/* Init */
+updateStats();
+</script>
+</body>
+</html>

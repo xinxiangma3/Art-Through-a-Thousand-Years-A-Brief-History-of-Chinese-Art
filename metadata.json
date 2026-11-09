@@ -1,0 +1,6 @@
+{
+  "name": "中国美术简史教师专区与艺术教学平台",
+  "description": "中国美术简史视觉艺术教师专区平台，包含传统水墨与故宫矿物色彩风韵、章节学习导航、色彩与透视教学互动游戏、中国艺术名人名言与实时时钟日历。",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
